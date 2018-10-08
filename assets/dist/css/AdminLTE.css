@@ -3222,7 +3222,7 @@ table.text-center th {
   border: 0;
 }
 .lockscreen-credentials .btn {
-  background-color: #fff;
+  background-color: #eac78e;
   border: 0;
   padding: 0 10px;
 }
@@ -3262,7 +3262,7 @@ table.text-center th {
 }
 .login-box-body,
 .register-box-body {
-  background: #fff;
+  background: #eac78e !important;
   padding: 20px;
   border-top: 0;
   color: #666;

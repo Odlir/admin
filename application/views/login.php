@@ -16,14 +16,31 @@
     <![endif]-->
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <style>
+        .bg-img{
+            background-image: url("<?php echo base_url();?>assets/images/log.jpg");
+            width: 100%;
+            height: 100%;
+            height:100vh !important;
+            min-height:100vh;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .login-box-body,
+        .register-box-body {
+            background: #ffdca3 !important;
+            border-radius: 15px;
+        }
+    </style>
   </head>
-  <body class="hold-transition login-page">
+  <body class="hold-transition login-page bg-img">
     <div class="login-box">
       <div class="login-logo">
-        <a href="#"><b>CodeInsect</b><br>Admin System</a>
+        <a href="#"><b>D.C.</b><br>Coorporación</a>
       </div><!-- /.login-logo -->
       <div class="login-box-body">
-        <p class="login-box-msg">Sign In</p>
+        <p class="login-box-msg">Log In</p>
         <?php $this->load->helper('form'); ?>
         <div class="row">
             <div class="col-md-12">
@@ -68,7 +85,7 @@
               </div>  -->                       
             </div><!-- /.col -->
             <div class="col-xs-4">
-              <input type="submit" class="btn btn-primary btn-block btn-flat" value="Sign In" />
+              <input type="submit" class="btn btn-primary" value="Ingresar" />
             </div><!-- /.col -->
           </div>
         </form>

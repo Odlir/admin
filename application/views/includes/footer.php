@@ -2,9 +2,9 @@
 
     <footer class="main-footer">
         <div class="pull-right hidden-xs">
-          <b>CodeInsect</b> Admin System | Version 1.5
+          <b>OdLir</b> Admin System | Version 1.0
         </div>
-        <strong>Copyright &copy; 2014-2015 <a href="<?php echo base_url(); ?>">CodeInsect</a>.</strong> All rights reserved.
+        <strong>Copyright &copy; 2018 <a href="<?php echo base_url(); ?>">OdLir</a>.</strong> All rights reserved.
     </footer>
     
     <script src="<?php echo base_url(); ?>assets/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>

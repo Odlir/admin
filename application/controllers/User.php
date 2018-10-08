@@ -26,7 +26,7 @@ class User extends BaseController
      */
     public function index()
     {
-        $this->global['pageTitle'] = 'CodeInsect : Dashboard';
+        $this->global['pageTitle'] = 'OdLir : Dashboard';
         
         $this->loadViews("dashboard", $this->global, NULL , NULL);
     }
@@ -269,7 +269,7 @@ class User extends BaseController
      */
     function pageNotFound()
     {
-        $this->global['pageTitle'] = 'CodeInsect : 404 - Page Not Found';
+        $this->global['pageTitle'] = 'Error : 404 - Page Not Found';
         
         $this->loadViews("404", $this->global, NULL, NULL);
     }
