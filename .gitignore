@@ -20,7 +20,7 @@ application/logs/*
 /application/config/constants.php
 
 #IDE metadata
-**.idea/**
+idea/**
 
 .htaccess
 .index.php
