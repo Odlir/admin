@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>CodeInsect | Reset Password</title>
+    <title> OdLir | Cambiar Contraseña</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <link href="<?php echo base_url(); ?>assets/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url(); ?>assets/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
@@ -20,10 +20,10 @@
   <body class="login-page">
     <div class="login-box">
       <div class="login-logo">
-        <a href="#"><b>CodeInsect</b><br>Admin System</a>
+        <a href="#"><b>OdLir</b><br>Admin System</a>
       </div><!-- /.login-logo -->
       <div class="login-box-body">
-        <p class="login-box-msg">Reset Password</p>
+        <p class="login-box-msg">Cambiar Contraseña</p>
         <?php $this->load->helper('form'); ?>
         <div class="row">
             <div class="col-md-12">

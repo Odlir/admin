@@ -76,7 +76,7 @@ class BaseController extends CI_Controller {
 	 * This function is used to load the set of views
 	 */
 	function loadThis() {
-		$this->global ['pageTitle'] = 'CodeInsect : Access Denied';
+		$this->global ['pageTitle'] = 'OdLir : Access Denied';
 		
 		$this->load->view ( 'includes/header', $this->global );
 		$this->load->view ( 'access' );

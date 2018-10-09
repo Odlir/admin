@@ -103,13 +103,13 @@
             <li class="header">MAIN NAVIGATION</li>
             <li class="treeview">
               <a href="<?php echo base_url(); ?>dashboard">
-                <i class="fa fa-dashboard"></i> <span>Dashboard</span></i>
+                <i class="fa fa-home"></i> <span>Inicio</span></i>
               </a>
             </li>
             <li class="treeview">
-              <a href="#" >
-                <i class="fa fa-plane"></i>
-                <span>New Task</span>
+              <a href="<?php echo base_url(); ?>inventario"" >
+                <i class="fa fa-th"></i>
+                <span>Inventario</span>
               </a>
             </li>
             <li class="treeview">

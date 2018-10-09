@@ -2,30 +2,22 @@
 
 require APPPATH . '/libraries/BaseController.php';
 
-
-class User extends BaseController
+class Inventario extends BaseController
 {
 
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('user_model');
+        $this->load->model('inventario/producto_model');
         $this->isLoggedIn();   
     }
-    
-    /**
-     * This function used to load the first screen of the user
-     */
+
     public function index()
     {
         $this->global['pageTitle'] = 'OdLir : Dashboard';
-        
-        $this->loadViews("dashboard", $this->global, NULL , NULL);
+        $this->loadViews("inventario/inventario", $this->global, NULL , NULL);
     }
-    
-    /**
-     * This function is used to load the user list
-     */
+
     function userListing()
     {
         if($this->isAdmin() == TRUE)
@@ -45,7 +37,7 @@ class User extends BaseController
             
             $data['userRecords'] = $this->user_model->userListing($searchText, $returns["page"], $returns["segment"]);
             
-            $this->global['pageTitle'] = 'OdLir : Listado de Usuarios';
+            $this->global['pageTitle'] = 'OdLir : User Listing';
             
             $this->loadViews("users", $this->global, $data, NULL);
         }
@@ -65,7 +57,7 @@ class User extends BaseController
             $this->load->model('user_model');
             $data['roles'] = $this->user_model->getUserRoles();
             
-            $this->global['pageTitle'] = 'OdLir :Agregar Nuevo Usuario';
+            $this->global['pageTitle'] = 'OdLir : Add New User';
 
             $this->loadViews("addNew", $this->global, $data, NULL);
         }
