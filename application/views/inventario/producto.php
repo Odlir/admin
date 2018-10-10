@@ -10,7 +10,7 @@
         <div class="row">
             <div class="col-xs-12 text-right">
                 <div class="form-group">
-                    <a class="btn btn-primary" href="<?php echo base_url(); ?>addNew"><i class="fa fa-plus"></i> Crear Nuevo</a>
+                    <a class="btn btn-primary" href="<?php echo base_url(); ?>inventario/producto/addNew"><i class="fa fa-plus"></i> Crear Nuevo Producto</a>
                 </div>
             </div>
         </div>
@@ -20,7 +20,7 @@
                     <div class="box-header">
                         <h3 class="box-title">Listado Productos</h3>
                         <div class="box-tools">
-                            <form action="<?php echo base_url() ?>userListing" method="POST" id="searchList">
+                            <form action="<?php echo base_url() ?>inventario/producto/productListing" method="POST" id="searchList">
                                 <div class="input-group">
                                     <input type="text" name="searchText" value="<?php echo $searchText; ?>" class="form-control input-sm pull-right" style="width: 150px;" placeholder="Search"/>
                                     <div class="input-group-btn">
@@ -53,8 +53,8 @@
                                         <td><?php echo $record->unidad ?></td>
                                         <td><?php echo date("d-m-Y", strtotime($record->created_at)) ?></td>
                                         <td class="text-center">
-                                            <a class="btn btn-sm btn-primary" href="<?= base_url().'login-history/'.$record->producto_id; ?>" title="Login history"><i class="fa fa-info-circle"></i></a> |
-                                            <a class="btn btn-sm btn-info" href="<?php echo base_url().'editOld/'.$record->producto_id; ?>" title="Edit"><i class="fa fa-pencil"></i></a>
+                                            <a class="btn btn-sm btn-primary" href="<?= base_url().'inventario'?>" title="Detalles"><i class="fa fa-info-circle"></i></a> |
+                                            <a class="btn btn-sm btn-info" href="<?php echo base_url().'inventario/producto/productEdit/'.$record->producto_id; ?>" title="Edit"><i class="fa fa-pencil"></i></a>
                                             <a class="btn btn-sm btn-danger deleteUser" href="#" data-userid="<?php echo $record->producto_id; ?>" title="Delete"><i class="fa fa-trash"></i></a>
                                         </td>
                                     </tr>
@@ -80,7 +80,7 @@
             e.preventDefault();
             var link = jQuery(this).get(0).href;
             var value = link.substring(link.lastIndexOf('/') + 1);
-            jQuery("#searchList").attr("action", baseURL + "userListing/" + value);
+            jQuery("#searchList").attr("action", baseURL + "productListing/" + value);
             jQuery("#searchList").submit();
         });
     });

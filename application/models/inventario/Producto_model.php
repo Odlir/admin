@@ -38,6 +38,16 @@ class Producto_model extends CI_Model
         return $query->num_rows();
     }
 
+    function getUnidadesMedida()
+    {
+        $this->db->select('u.*');
+        $this->db->from('tbl_unidades u');
+        $this->db->where('u.activo', 1);
+        $query = $this->db->get();
+
+        return $query->result();
+    }
+
 
 }
 
