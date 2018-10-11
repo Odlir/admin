@@ -16,8 +16,8 @@ application/logs/*
 !application/logs/.htaccess
 /vendor/
 
-/application/config/database.php
-/application/config/constants.php
+#/application/config/database.php
+#/application/config/constants.php
 
 #IDE metadata
 .idea/**

@@ -44,7 +44,7 @@ class Producto extends BaseController
 
             $this->global['pageTitle'] = 'OdLir :Agregar Nuevo Producto';
 
-            $this->loadViews("addNew", $this->global, $data, NULL);
+            $this->loadViews("inventario/addNewProducto", $this->global, $data, NULL);
 
     }
 

@@ -5,8 +5,9 @@ class Producto_model extends CI_Model
 
     function productListing($searchText = '', $page, $segment)
     {
-        $this->db->select('p.*');
+        $this->db->select('p.*, u.nombre as nombre_producto');
         $this->db->from('tbl_productos as p');
+        $this->db->join('tbl_unidades u','u.unidad_id = p.unidad');
         if(!empty($searchText)) {
             $likeCriteria = "(p.nombre  LIKE '%".$searchText."%'
                             OR  p.codigo  LIKE '%".$searchText."%'

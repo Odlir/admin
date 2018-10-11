@@ -50,7 +50,7 @@
                                         <td><?php echo $record->nombre ?></td>
                                         <td><?php echo $record->codigo ?></td>
                                         <td><?php echo $record->marca ?></td>
-                                        <td><?php echo $record->unidad ?></td>
+                                        <td><?php echo $record->nombre_producto ?></td>
                                         <td><?php echo date("d-m-Y", strtotime($record->created_at)) ?></td>
                                         <td class="text-center">
                                             <a class="btn btn-sm btn-primary" href="<?= base_url().'inventario'?>" title="Detalles"><i class="fa fa-info-circle"></i></a> |

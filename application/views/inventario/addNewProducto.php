@@ -1,7 +1,7 @@
 <div class="content-wrapper">
     <section class="content-header">
       <h1>
-        <i class="fa fa-users"></i> User Management
+        <i class="fa fa-cubes"></i> Manejo de Productos
         <small>Agregar / Editar Producto</small>
       </h1>
     </section>
@@ -16,19 +16,19 @@
                         <h3 class="box-title">Ingresar Detalles del Producto</h3>
                     </div>
                     <?php $this->load->helper("form"); ?>
-                    <form role="form" id="addUser" action="<?php echo base_url() ?>addNewProducto" method="post" role="form">
+                    <form role="form" id="addUser" action="<?php echo base_url() ?>inventario/producto/addNewProducto" method="post" role="form">
                         <div class="box-body">
                             <div class="row">
-                                <div class="col-md-6">                                
+                                <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="fname">Full Name</label>
+                                        <label for="fname">Nombre: *</label>
                                         <input type="text" class="form-control required" value="<?php echo set_value('fname'); ?>" id="fname" name="fname" maxlength="128">
                                     </div>
                                     
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="email">Email address</label>
+                                        <label for="email">Codigo: </label>
                                         <input type="text" class="form-control required email" id="email" value="<?php echo set_value('email'); ?>" name="email" maxlength="128">
                                     </div>
                                 </div>
@@ -36,49 +36,58 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="password">Password</label>
+                                        <label for="password">Marca: </label>
                                         <input type="password" class="form-control required" id="password" name="password" maxlength="20">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="cpassword">Confirm Password</label>
-                                        <input type="password" class="form-control required equalTo" id="cpassword" name="cpassword" maxlength="20">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="mobile">Mobile Number</label>
-                                        <input type="text" class="form-control required digits" id="mobile" value="<?php echo set_value('mobile'); ?>" name="mobile" maxlength="10">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="role">Role</label>
                                         <select class="form-control required" id="role" name="role">
-                                            <option value="0">Select Role</option>
+                                            <option value="0">Unidad de Medida: *</option>
                                             <?php
-                                            if(!empty($roles))
+                                            if(!empty($unidades))
                                             {
-                                                foreach ($roles as $rl)
+                                                foreach ($unidades as $rl)
                                                 {
                                                     ?>
-                                                    <option value="<?php echo $rl->roleId ?>" <?php if($rl->roleId == set_value('role')) {echo "selected=selected";} ?>><?php echo $rl->role ?></option>
+                                                    <option value="<?php echo $rl->unidad_id ?>"><?php echo $rl->nombre?></option>
                                                     <?php
                                                 }
                                             }
                                             ?>
                                         </select>
                                     </div>
-                                </div>    
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="mobile">Comentario</label>
+                                        <input type="text" class="form-control required digits" id="mobile" value="<?php echo set_value('mobile'); ?>" name="mobile" maxlength="10">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="fname">Imagen: </label>
+                                        <input type="file" class="form-control required" value="<?php echo set_value('fname'); ?>" id="image" name="image" maxlength="128">
+                                    </div>
+
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="email">Documento tecnico: </label>
+                                        <input type="file" class="form-control required" id="documento" value="<?php echo set_value('email'); ?>" name="documento" maxlength="128">
+                                    </div>
+                                </div>
                             </div>
                         </div>
     
-                        <div class="box-footer">
-                            <input type="submit" class="btn btn-primary" value="Submit" />
-                            <input type="reset" class="btn btn-default" value="Reset" />
+                        <div class="box-footer text-right">
+                            <input type="reset" class="btn btn-default" value="Limpiar" />
+                            <input type="submit" class="btn btn-success" value="Guardar" />
                         </div>
                     </form>
                 </div>
