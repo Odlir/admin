@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bd7a4cc7-7859-42d4-9351-c7a8ee0064d2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/application/controllers/inventario/Producto.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/inventario/Producto.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/models/inventario/Producto_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/inventario/Producto_model.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/inventario/addNewProducto.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/inventario/addNewProducto.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/inventario/producto.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/inventario/producto.php" afterDir="false" />
-    </list>
+    <list default="true" id="bd7a4cc7-7859-42d4-9351-c7a8ee0064d2" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,7 +12,7 @@
     <session id="1395438083">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="3" />
+          <entry key="project.closed" value="4" />
           <entry key="project.open.time.3" value="1" />
           <entry key="project.open.time.6" value="1" />
           <entry key="project.open.time.8" value="2" />
@@ -98,7 +93,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/views/inventario/addNewProducto.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="207">
+            <state relative-caret-position="527">
               <caret line="31" column="133" selection-start-line="31" selection-start-column="124" selection-end-line="31" selection-end-column="133" />
             </state>
           </provider>
@@ -235,9 +230,9 @@
   <component name="PhpServers">
     <servers />
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="116" />
-    <option name="y" value="219" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="55" />
+    <option name="y" value="62" />
     <option name="width" value="1615" />
     <option name="height" value="952" />
   </component>
@@ -303,6 +298,13 @@
               <item name="admin" type="462c0819:PsiDirectoryNode" />
               <item name="application" type="462c0819:PsiDirectoryNode" />
               <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="includes" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="admin" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
               <item name="inventario" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -354,18 +356,17 @@
       <workItem from="1538970437031" duration="7257000" />
       <workItem from="1539018908467" duration="19070000" />
       <workItem from="1539140107619" duration="3497000" />
-      <workItem from="1539225398291" duration="5296000" />
+      <workItem from="1539225398291" duration="6127000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="35120000" />
+    <option name="totallyTimeSpent" value="35951000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1874" height="1096" extended-state="7" />
-    <editor active="true" />
+    <frame x="55" y="62" width="1615" height="952" extended-state="0" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.176957" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20643087" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -694,7 +695,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/inventario/addNewProducto.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
+        <state relative-caret-position="527">
           <caret line="31" column="133" selection-start-line="31" selection-start-column="124" selection-end-line="31" selection-end-column="133" />
         </state>
       </provider>
