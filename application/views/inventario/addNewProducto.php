@@ -16,34 +16,34 @@
                         <h3 class="box-title">Ingresar Detalles del Producto</h3>
                     </div>
                     <?php $this->load->helper("form"); ?>
-                    <form role="form" id="addUser" action="<?php echo base_url() ?>inventario/producto/addNewProducto" method="post" role="form">
+                    <form role="form" id="addUser" action="<?php echo base_url() ?>addNewProduct" method="post" role="form">
                         <div class="box-body">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="fname">Nombre: *</label>
-                                        <input type="text" class="form-control required" value="<?php echo set_value('fname'); ?>" id="fname" name="fname" maxlength="128">
+                                        <label for="nombre">Nombre: *</label>
+                                        <input type="text" class="form-control required" value="<?php  ?>" id="nombre" name="nombre" maxlength="128">
                                     </div>
                                     
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="email">Codigo: </label>
-                                        <input type="text" class="form-control required email" id="email" value="<?php echo set_value('email'); ?>" name="email" maxlength="128">
+                                        <label for="codigo">Codigo: </label>
+                                        <input type="text" class="form-control required" id="codigo" value="<?php  ?>" name="codigo" maxlength="128">
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="password">Marca: </label>
-                                        <input type="password" class="form-control required" id="password" name="password" maxlength="20">
+                                        <label for="marca">Marca: </label>
+                                        <input type="text" class="form-control required" id="marca" name="marca" maxlength="20">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="role">Role</label>
-                                        <select class="form-control required" id="role" name="role">
+                                        <label for="unidad">Unidad de Medida: </label>
+                                        <select class="form-control required" id="unidad" name="unidad">
                                             <option value="0">Unidad de Medida: *</option>
                                             <?php
                                             if(!empty($unidades))
@@ -61,31 +61,53 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="mobile">Comentario</label>
-                                        <input type="text" class="form-control required digits" id="mobile" value="<?php echo set_value('mobile'); ?>" name="mobile" maxlength="10">
+                                        <label for="familia">Familia: </label>
+                                        <select class="form-control required" id="familia" name="familia">
+                                            <option value="0">Familia: *</option>
+                                            <?php
+                                            if(!empty($familias))
+                                            {
+                                                foreach ($familias as $rl)
+                                                {
+                                                    ?>
+                                                    <option value="<?php echo $rl->familia_id ?>"><?php echo $rl->nombre?></option>
+                                                    <?php
+                                                }
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="documento">Documento tecnico: </label>
+                                        <input type="file" class="form-control" id="documento" value=" ?>" name="documento" maxlength="128">
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="fname">Imagen: </label>
-                                        <input type="file" class="form-control required" value="<?php echo set_value('fname'); ?>" id="image" name="image" maxlength="128">
+                                        <label for="image">Imagen: </label>
+                                        <input type="file" class="form-control" value="<?php ?>" id="image" name="image" maxlength="128">
                                     </div>
 
                                 </div>
-                                <div class="col-md-6">
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
                                     <div class="form-group">
-                                        <label for="email">Documento tecnico: </label>
-                                        <input type="file" class="form-control required" id="documento" value="<?php echo set_value('email'); ?>" name="documento" maxlength="128">
+                                        <label for="mobile">Comentario: </label>
+                                        <input type="text" class="form-control" id="comentario" value="<?php  ?>" name="comentario" maxlength="200">
                                     </div>
                                 </div>
                             </div>
                         </div>
     
                         <div class="box-footer text-right">
+                            <a href="<?php echo base_url();?>productListing" class="btn btn-warning text-left">Regresar</a>
                             <input type="reset" class="btn btn-default" value="Limpiar" />
                             <input type="submit" class="btn btn-success" value="Guardar" />
                         </div>

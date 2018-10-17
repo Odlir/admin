@@ -89,7 +89,8 @@ $route['resetPasswordConfirmUser/(:any)/(:any)'] = "login/resetPasswordConfirmUs
 $route['createPasswordUser'] = "login/createPasswordUser";
 //Inventario
 $route['inventario'] = 'inventario/inventario';
-$route['inventario/producto'] = 'inventario/producto';
-
+$route['productListing'] = 'inventario/producto/productListing';
+$route['productListing/(:num)'] = 'inventario/producto/productListing/$1';
+$route['addNewProduct'] = "inventario/producto/addNewProduct";
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

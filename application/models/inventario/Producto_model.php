@@ -5,9 +5,10 @@ class Producto_model extends CI_Model
 
     function productListing($searchText = '', $page, $segment)
     {
-        $this->db->select('p.*, u.nombre as nombre_producto');
+        $this->db->select('p.*, u.nombre as nombre_producto, f.nombre as nombre_familia');
         $this->db->from('tbl_productos as p');
         $this->db->join('tbl_unidades u','u.unidad_id = p.unidad');
+        $this->db->join('tbl_familia f','f.familia_id = p.familia');
         if(!empty($searchText)) {
             $likeCriteria = "(p.nombre  LIKE '%".$searchText."%'
                             OR  p.codigo  LIKE '%".$searchText."%'
@@ -39,11 +40,56 @@ class Producto_model extends CI_Model
         return $query->num_rows();
     }
 
+    function userListing($searchText = '', $page, $segment)
+    {
+        $this->db->select('BaseTbl.userId, BaseTbl.email, BaseTbl.name, BaseTbl.mobile, BaseTbl.createdDtm, Role.role');
+        $this->db->from('tbl_users as BaseTbl');
+        $this->db->join('tbl_roles as Role', 'Role.roleId = BaseTbl.roleId','left');
+        if(!empty($searchText)) {
+            $likeCriteria = "(BaseTbl.email  LIKE '%".$searchText."%'
+                            OR  BaseTbl.name  LIKE '%".$searchText."%'
+                            OR  BaseTbl.mobile  LIKE '%".$searchText."%')";
+            $this->db->where($likeCriteria);
+        }
+        $this->db->where('BaseTbl.isDeleted', 0);
+        $this->db->where('BaseTbl.roleId !=', 1);
+        $this->db->order_by('BaseTbl.userId', 'DESC');
+        $this->db->limit($page, $segment);
+        $query = $this->db->get();
+
+        $result = $query->result();
+        return $result;
+    }
+
+    function addNewProduct($productInfo)
+    {
+        $this->db->trans_start();
+        $this->db->insert('tbl_productos', $productInfo);
+
+        $insert_id = $this->db->insert_id();
+
+        $this->db->trans_complete();
+
+        return $insert_id;
+    }
+
+
     function getUnidadesMedida()
     {
         $this->db->select('u.*');
         $this->db->from('tbl_unidades u');
         $this->db->where('u.activo', 1);
+        $query = $this->db->get();
+
+        return $query->result();
+    }
+
+
+    function getFamilias()
+    {
+        $this->db->select('f.*');
+        $this->db->from('tbl_familia f');
+        $this->db->where('f.activo', 1);
         $query = $this->db->get();
 
         return $query->result();

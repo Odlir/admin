@@ -20,7 +20,7 @@
                     <div class="box-header">
                         <h3 class="box-title">Listado Productos</h3>
                         <div class="box-tools">
-                            <form action="<?php echo base_url() ?>inventario/producto/productListing" method="POST" id="searchList">
+                            <form action="<?php echo base_url() ?>productListing" method="POST" id="searchList">
                                 <div class="input-group">
                                     <input type="text" name="searchText" value="<?php echo $searchText; ?>" class="form-control input-sm pull-right" style="width: 150px;" placeholder="Search"/>
                                     <div class="input-group-btn">
@@ -37,7 +37,7 @@
                                 <th>Codigo</th>
                                 <th>Marca</th>
                                 <th>Unidad</th>
-                                <th>Fecha</th>
+                                <th>Familia</th>
                                 <th class="text-center">Actions</th>
                             </tr>
                             <?php
@@ -51,7 +51,7 @@
                                         <td><?php echo $record->codigo ?></td>
                                         <td><?php echo $record->marca ?></td>
                                         <td><?php echo $record->nombre_producto ?></td>
-                                        <td><?php echo date("d-m-Y", strtotime($record->created_at)) ?></td>
+                                        <td><?php echo $record->nombre_familia ?></td>
                                         <td class="text-center">
                                             <a class="btn btn-sm btn-primary" href="<?= base_url().'inventario'?>" title="Detalles"><i class="fa fa-info-circle"></i></a> |
                                             <a class="btn btn-sm btn-info" href="<?php echo base_url().'inventario/producto/productEdit/'.$record->producto_id; ?>" title="Edit"><i class="fa fa-pencil"></i></a>
