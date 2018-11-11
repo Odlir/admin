@@ -75,12 +75,12 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'aagv8gnao2t02s.cyd5qovyakge.us-east-2.rds.amazonaws.com',
+	'hostname' => 'localhost',
     //'hostname' => 'localhost',
-	'username' => 'odlir',
+	'username' => 'root',
     //'username' => 'root',
     //'password' => '',
-	'password' => 'odlir112358',
+	'password' => '',
 	'database' => 'cias',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',

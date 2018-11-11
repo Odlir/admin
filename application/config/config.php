@@ -25,8 +25,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 //$base  = "http://".$_SERVER['HTTP_HOST'];
 //$base .= str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
-//$config['base_url'] = 'http://localhost/admin/';
-$config['base_url'] = 'http://sistemadc-env.hapvwqbam8.us-east-2.elasticbeanstalk.com/';
+$config['base_url'] = 'http://localhost/admin/';
+//$config['base_url'] = 'http://sistemadc-env.hapvwqbam8.us-east-2.elasticbeanstalk.com/';
 
 /*
 |--------------------------------------------------------------------------
