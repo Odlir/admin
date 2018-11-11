@@ -16,7 +16,9 @@ class Producto extends BaseController
     {
         $this->productListing();
     }
-
+    function example(){
+        echo "example";
+    }
     function productListing()
     {
         $searchText = $this->security->xss_clean($this->input->post('searchText'));

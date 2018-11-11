@@ -18,6 +18,8 @@ class Inventario extends BaseController
         $this->loadViews("inventario/inventario", $this->global, NULL , NULL);
     }
 
+
+
     function userListing()
     {
         if($this->isAdmin() == TRUE)
