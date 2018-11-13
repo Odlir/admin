@@ -38,10 +38,8 @@ class Orden extends BaseController
 
     function addNew()
     {
-        //$data['unidades'] = $this->producto_model->getUnidadesMedida();
-
         $data['proveedor'] = $this->orden_model->getProveedores();
-
+        $data['fecha'] = date('d/m/Y');
         $this->global['pageTitle'] = 'OdLir :Agregar Nuevo Orden';
 
         $this->loadViews("documento/addNewOrden", $this->global, $data, NULL);
