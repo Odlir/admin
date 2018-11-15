@@ -21,13 +21,13 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="nrodocumento">N° Documento</label>
+                                        <label for="nrodocumento">Obra:*</label>
                                         <input type="text" class="form-control required" value="<?php  ?>" id="nrodocumento" name="nrodocumento" maxlength="128">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="fecha">Fecha: </label>
+                                        <label for="fecha">Fecha:*</label>
                                         <div class="input-group date" id="datetimepicker">
                                             <input type="text" class="form-control" value="<?php echo $fecha; ?>" name="fecha" id="fecha" maxlength="128">
                                             <span class="input-group-addon">
@@ -37,7 +37,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
+                            <!-- <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="proveedor">Proveedor: </label>
@@ -57,7 +57,7 @@
                                         </select>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
@@ -67,16 +67,22 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-7">
+                                <div class="col-md-5">
                                     <div class="form-group">
                                         <label for="comentario">Producto: </label>
                                         <input type="text" class="form-control" id="prod" value="<?php  ?>" name="prod" maxlength="200">
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-2">
                                     <div class="form-group">
                                         <label for="comentario">Cantidad: </label>
-                                        <input type="text" class="form-control" id="cantidad" value="<?php  ?>" name="cantidad" maxlength="10">
+                                        <input type="number" class="form-control" id="cantidad" value="<?php  ?>" name="cantidad" maxlength="10">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="comentario">Comentario: </label>
+                                        <input type="text" class="form-control" id="comentario" value="<?php  ?>" name="comentario" maxlength="250">
                                     </div>
                                 </div>
                                 <div class="col-md-1">
@@ -92,26 +98,30 @@
                                         <table id="tblDetalleOrden" class="table table-sm table-hover table-bordered table-responsive">
                                             <thead>
                                                 <tr class="success">
-                                                    <th class="col-md-2">#</th>
+                                                    <th class="col-md-1">#</th>
                                                     <th class="col-md-2">Cantidad</th>
-                                                    <th class="col-md-8">Producto</th>
+                                                    <th class="col-md-4">Producto</th>
+                                                    <th class="col-md-5">Comentario</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <th scope="row" class="col-md-2">1</th>
+                                                    <th scope="row" class="col-md-1">1</th>
                                                     <td class="col-md-2">Mark</td>
-                                                    <td class="col-md-8">Otto</td>
+                                                    <td class="col-md-4">Otto</td>
+                                                    <td class="col-md-5">Otto</td>
                                                 </tr>
                                                 <tr>
-                                                    <th scope="row" class="col-md-2">2</th>
-                                                    <td class="col-md-2">Jacob</td>
-                                                    <td class="col-md-8">Thornton</td>
+                                                    <th scope="row" class="col-md-1">1</th>
+                                                    <td class="col-md-2">Mark</td>
+                                                    <td class="col-md-4">Otto</td>
+                                                    <td class="col-md-5">Otto</td>
                                                 </tr>
                                                 <tr>
-                                                    <th scope="row" class="col-md-2">3</th>
-                                                    <td class="col-md-2">Larry the Bird</td>
-                                                    <td class="col-md-8">@twitter</td>
+                                                    <th scope="row" class="col-md-1">1</th>
+                                                    <td class="col-md-2">Mark</td>
+                                                    <td class="col-md-4">Otto</td>
+                                                    <td class="col-md-5">Otto</td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -168,10 +178,15 @@
         event.preventDefault();
         prod = $("#prod").val();
         cantidad = $("#cantidad").val();
-        row  = '<tr><th scope="row" class="col-md-2">'+4+'</th>';
-        row += '<td class="col-md-2">'+prod+'</td>';
-        row += '<td class="col-md-2">'+cantidad+'</td></tr>';
+        comentario = $("#comentario").val();
+        row  = '<tr><th scope="row" class="col-md-1">'+4+'</th>';
+        row += '<td class="col-md-2">'+cantidad+'</td>';
+        row += '<td class="col-md-4">'+prod+'</td>';
+        row += '<td class="col-md-5">'+comentario+'</td></tr>';
         $("#tblDetalleOrden").append(row);
+        $("#prod").val('');
+        $("#cantidad").val('');
+        $("#comentario").val('');
         $("#prod").focus();
         return true;
     });
