@@ -33,10 +33,21 @@ class Orden_model extends CI_Model
 
         return $query->num_rows();
     }
-    function addNewOrden($info)
+    function orden_insert($info)
     {
         $this->db->trans_start();
         $this->db->insert('tbl_orden', $info);
+
+        $insert_id = $this->db->insert_id();
+
+        $this->db->trans_complete();
+
+        return $insert_id;
+    }
+    function ordendetalle_insert($info)
+    {
+        $this->db->trans_start();
+        $this->db->insert('tbl_ordendetalle', $info);
 
         $insert_id = $this->db->insert_id();
 

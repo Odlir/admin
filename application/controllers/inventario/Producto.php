@@ -80,6 +80,10 @@ class Producto extends BaseController
         redirect('productListing');
 
     }
+    function all(){
+        $data = $this->producto_model->productListing('', 10, 1);
+        json_output(200,$data);
+    }
 
 
 }

@@ -38,10 +38,8 @@ class Orden extends BaseController
 
     function addNew()
     {
-        //$data['unidades'] = $this->producto_model->getUnidadesMedida();
-
         $data['proveedor'] = $this->orden_model->getProveedores();
-
+        $data['fecha'] = date('d/m/Y');
         $this->global['pageTitle'] = 'OdLir :Agregar Nuevo Orden';
 
         $this->loadViews("documento/addNewOrden", $this->global, $data, NULL);
@@ -54,26 +52,34 @@ class Orden extends BaseController
         $nrodocumento = $this->input->post('nrodocumento');
         $proveedor = $this->input->post('proveedor');
         $comentario = $this->input->post('comentario');
+        $productos=json_decode($this->input->post('productos'));
 
 
-        $info = array('nrodocumento'=>$nrodocumento, 'proveedor_id'=>$proveedor, 'comentario'=>$comentario);
+        $info = array(
+            'nrodocumento'=>$nrodocumento,
+            'proveedor_id'=>$proveedor,
+            'activo'=>1,
+            'comentario'=>$comentario);
 
-        $result = $this->orden_model->addNewOrden($info);
-
-        if($result > 0)
+        $orden_id = $this->orden_model->orden_insert($info);
+        if($orden_id > 0)
         {
-            $this->session->set_flashdata('success', 'Creación satisfactoria');
+            foreach ($productos as $producto) {
+                $info = array(
+                    'orden_id'=>$orden_id,
+                    'producto_id'=>$producto->producto_id,
+                    'cantidad'=>$producto->cantidad,
+                    'comentario'=>$producto->comentario);
+                $this->orden_model->ordendetalle_insert($info);
+            }
+         $this->session->set_flashdata('success', 'Creación satisfactoria');
         }
         else
         {
             $this->session->set_flashdata('error', 'Creación fallida');
         }
-
         redirect('ordenListing');
-
     }
-
-
 }
 
 ?>
