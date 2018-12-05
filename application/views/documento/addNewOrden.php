@@ -82,7 +82,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="comentario">Comentario: </label>
-                                        <input type="text" class="form-control" id="comentario" value="<?php  ?>" name="comentario" maxlength="250">
+                                        <input type="text" class="form-control" id="comen" value="<?php  ?>" name="comen" maxlength="250">
                                     </div>
                                 </div>
                                 <div class="col-md-1">
@@ -104,25 +104,7 @@
                                                     <th class="col-md-5">Comentario</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <th scope="row" class="col-md-1">1</th>
-                                                    <td class="col-md-2">Mark</td>
-                                                    <td class="col-md-4">Otto</td>
-                                                    <td class="col-md-5">Otto</td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row" class="col-md-1">1</th>
-                                                    <td class="col-md-2">Mark</td>
-                                                    <td class="col-md-4">Otto</td>
-                                                    <td class="col-md-5">Otto</td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row" class="col-md-1">1</th>
-                                                    <td class="col-md-2">Mark</td>
-                                                    <td class="col-md-4">Otto</td>
-                                                    <td class="col-md-5">Otto</td>
-                                                </tr>
+                                            <tbody id="detalles">
                                             </tbody>
                                         </table>
                                     </div>
@@ -178,7 +160,7 @@
         event.preventDefault();
         prod = $("#prod").val();
         cantidad = $("#cantidad").val();
-        comentario = $("#comentario").val();
+        comentario = $("#comen").val();
         row  = '<tr><th scope="row" class="col-md-1">'+4+'</th>';
         row += '<td class="col-md-2">'+cantidad+'</td>';
         row += '<td class="col-md-4">'+prod+'</td>';
@@ -188,6 +170,8 @@
         $("#cantidad").val('');
         $("#comentario").val('');
         $("#prod").focus();
+        var rows = $('#detalles tr').length;
+        console.log('filas',rows);
         return true;
     });
 </script>
