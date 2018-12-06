@@ -1,4 +1,4 @@
-<div class="content-wrapper" ng-app="ordenApp" ng-controller="ordenController">
+<div class="content-wrapper" ng-app="ordenApp" ng-controller="ordenController" data-ng-init="init()">
     <section class="content-header">
         <h1>
             <i class="fa fa-cubes"></i> Manejo de Orden de Compra
@@ -16,21 +16,22 @@
                         <h3 class="box-title">Ingresar Detalles del Producto</h3>
                     </div>
                     <?php $this->load->helper("form"); ?>
-                    <form role="form"  action="<?php echo base_url() ?>addNewOrden" method="post" role="form">
+                    <form role="form"  action="<?php echo base_url().$url_action ?>" method="post" role="form">
                         <input type="hidden" id="url" value="<?php echo base_url() ?>">
+                        <input type="hidden" id="orden_id" name="orden_id" value="<?php echo $orden_id;?>" />
                         <div class="box-body">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="nrodocumento">Obra:*</label>
-                                        <input type="text" class="form-control required" value="<?php  ?>" name="nrodocumento" maxlength="128">
+                                        <input type="text" class="form-control required" value="<?php echo $nrodocumento;?>" name="nrodocumento" maxlength="128">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="fecha">Fecha:*</label>
                                         <div class="input-group date" id="datetimepicker">
-                                            <input type="text" class="form-control" value="<?php echo $fecha; ?>" name="fecha" id="fecha" maxlength="128">
+                                            <input type="text" class="form-control" value="<?php echo $fecha; ?>" name="fecha" id="fecha" maxlength="128" readonly>
                                             <span class="input-group-addon">
                                                 <span class="glyphicon glyphicon-calendar"></span>
                                             </span>
@@ -42,7 +43,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="proveedor">Proveedor: </label>
-                                        <select class="form-control required" name="proveedor">
+                                        <select class="form-control required" id="proveedor" name="proveedor" >
                                             <option value="0">Proveedor: *</option>
                                             <?php
                                             if(!empty($proveedor))
@@ -63,7 +64,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="comentario">Comentario: </label>
-                                        <input type="text" class="form-control" value="<?php  ?>" name="comentario" maxlength="200">
+                                        <input type="text" class="form-control" value="<?php echo $comentario;?>" name="comentario" maxlength="200">
                                     </div>
                                 </div>
                             </div>
@@ -84,13 +85,13 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr ng-repeat="producto in productos_seleccionados">
+                                            <tr ng-repeat="producto in productos_seleccionados | filter:{activo:1}:true">
                                                 <th scope="row" class="col-md-1">{{$index+1}}</th>
                                                 <td class="col-md-2">{{producto.codigo}}</td>
                                                 <td class="col-md-4">{{producto.nombre}}</td>
                                                 <td class="col-md-2"> <input class="form-control" type="number" ng-model="producto.cantidad" /></td>
                                                 <td class="col-md-2"><input class="form-control" type="text" ng-model="producto.comentario" /> </td>
-                                                <td class="col-md-1 text-center"><a href="javascript:;" ng-click="removeProducto($index)" class="text-danger"><i class="fa fa-times"></i></a></td>
+                                                <td class="col-md-1 text-center"><a href="javascript:;" ng-click="removeProducto(producto)" class="text-danger"><i class="fa fa-times"></i></a></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -157,10 +158,10 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            <tr ng-repeat="producto in productos | filter:buscarProducto">
+                            <tr ng-repeat="producto in productos | filter: (buscarProducto || filter_productoagregados)">
                                 <td>{{producto.codigo}}</td>
                                 <td>{{producto.nombre}}</td>
-                                <td><button ng-click="producto_seleccionar(producto.producto_id)" class="btn btn-sm btn-default">Seleccionar</button></td>
+                                <td><button ng-click="producto_agregar(producto.producto_id)" class="btn btn-sm btn-default">Seleccionar</button></td>
                             </tr>
 
                             </tbody>
@@ -175,28 +176,12 @@
         </div>
     </section>
 </div>
-<script src="<?php echo base_url(); ?>assets/js/addUser.js" type="text/javascript"></script>
 <script src="<?php echo base_url(); ?>assets/js/angular.min.js" type="text/javascript"></script>
 <script src="<?php echo base_url(); ?>assets/js/controller/ordenController.js" type="text/javascript"></script>
-<script type="text/javascript">
+<script >
     $(function () {
-        $('#datetimepicker').datepicker({format: 'dd/mm/yyyy'});
-    });
-    $('#addElement').click(function(event){
-        event.preventDefault();
-        prod = $("#item_codigo").val();
-        cantidad = $("#item_cantidad").val();
-        comentario = $("#item_comentario").val();
-        row  = '<tr><th scope="row" class="col-md-1">'+4+'</th>';
-        row += '<td class="col-md-2">'+cantidad+'</td>';
-        row += '<td class="col-md-4">'+prod+'</td>';
-        row += '<td class="col-md-5">'+comentario+'</td></tr>';
+        //$('#datetimepicker').datepicker({format: 'dd/mm/yyyy'});
 
-        $("#tblDetalleOrden").append(row);
-        $("#item_codigo").val('');
-        $("#item_cantidad").val('');
-        $("#item_comentario").val('');
-        $("#item_codigo").focus();
-        return true;
+        $('#proveedor').val("<?php echo $proveedor_id;?>");
     });
 </script>

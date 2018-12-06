@@ -97,7 +97,8 @@ $route['addNewProduct'] = "inventario/producto/addNewProduct";
 $route['documento'] = 'documento/documento';
 $route['ordenListing'] = 'documento/orden/ordenListing';
 $route['ordenListing/(:num)'] = 'documento/orden/ordenListing/$1';
-$route['addNewOrden'] = "documento/orden/addNewOrden";
+$route['addOrden'] = "documento/orden/addOrden";
+$route['editOrden'] = "documento/orden/editOrden";
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

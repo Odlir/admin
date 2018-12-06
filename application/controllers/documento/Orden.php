@@ -16,6 +16,7 @@ class Orden extends BaseController
     {
         $this->ordenListing();
     }
+
     function ordenListing()
     {
         $searchText = $this->security->xss_clean($this->input->post('searchText'));
@@ -26,7 +27,7 @@ class Orden extends BaseController
 
         $count = $this->orden_model->ordenListingCount($searchText);
 
-        $returns = $this->paginationCompress ( "orden/", $count, 10 );
+        $returns = $this->paginationCompress("orden/", $count, 10);
 
         $data['items'] = $this->orden_model->ordenListing($searchText, $returns["page"], $returns["segment"]);
 
@@ -36,49 +37,110 @@ class Orden extends BaseController
 
     }
 
-    function addNew()
+    function addNew($id = 0)
     {
+        $data['orden_id'] = $id;
+        $data['nrodocumento'] = '';
+        $data['fecha'] = '';
+        $data['comentario'] = '';
+        $data['proveedor_id'] = 0;
+        $data['url_action']='addOrden';
+        if ($id != 0) {
+            $data['url_action']='editOrden';
+
+            $orden = $this->orden_model->get($id);
+
+            $data['nrodocumento'] = $orden->nrodocumento;
+            $data['fecha'] = $orden->fecha;
+            $data['comentario'] = $orden->comentario;
+            $data['proveedor_id'] = $orden->proveedor_id;
+        }
+
         $data['proveedor'] = $this->orden_model->getProveedores();
-        $data['fecha'] = date('d/m/Y');
+
         $this->global['pageTitle'] = 'OdLir :Agregar Nuevo Orden';
 
         $this->loadViews("documento/addNewOrden", $this->global, $data, NULL);
 
     }
 
-    function addNewOrden()
+    function addOrden()
     {
-
         $nrodocumento = $this->input->post('nrodocumento');
         $proveedor = $this->input->post('proveedor');
         $comentario = $this->input->post('comentario');
-        $productos=json_decode($this->input->post('productos'));
-
+        $productos = json_decode($this->input->post('productos'));
 
         $info = array(
-            'nrodocumento'=>$nrodocumento,
-            'proveedor_id'=>$proveedor,
-            'activo'=>1,
-            'comentario'=>$comentario);
+            'nrodocumento' => $nrodocumento,
+            'proveedor_id' => $proveedor,
+            'activo' => 1,
+            'comentario' => $comentario);
 
         $orden_id = $this->orden_model->orden_insert($info);
-        if($orden_id > 0)
-        {
+        if ($orden_id > 0) {
             foreach ($productos as $producto) {
                 $info = array(
-                    'orden_id'=>$orden_id,
-                    'producto_id'=>$producto->producto_id,
-                    'cantidad'=>$producto->cantidad,
-                    'comentario'=>$producto->comentario);
+                    'orden_id' => $orden_id,
+                    'producto_id' => $producto->producto_id,
+                    'cantidad' => $producto->cantidad,
+                    'comentario' => $producto->comentario);
                 $this->orden_model->ordendetalle_insert($info);
             }
-         $this->session->set_flashdata('success', 'Creación satisfactoria');
-        }
-        else
-        {
+            $this->session->set_flashdata('success', 'Creación satisfactoria');
+        } else {
             $this->session->set_flashdata('error', 'Creación fallida');
         }
         redirect('ordenListing');
+    }
+    function editOrden()
+    {
+        $orden_id = $this->input->post('orden_id');
+        $nrodocumento = $this->input->post('nrodocumento');
+        $proveedor = $this->input->post('proveedor');
+        $comentario = $this->input->post('comentario');
+        $productos = json_decode($this->input->post('productos'));
+
+        $info = array(
+            'nrodocumento' => $nrodocumento,
+            'proveedor_id' => $proveedor,
+            'comentario' => $comentario);
+
+        $result = $this->orden_model->orden_update($orden_id, $info);
+
+        if ($result) {
+            foreach ($productos as $producto) {
+                if($producto->ordendetalle_id != 0){
+                    $info = array(
+                        'producto_id' => $producto->producto_id,
+                        'cantidad' => $producto->cantidad,
+                        'comentario' => $producto->comentario,
+                        'activo'=>$producto->activo
+                    );
+                    $this->orden_model->ordendetalle_update($producto->ordendetalle_id,$info);
+                }else{
+                    $info = array(
+                        'orden_id' => $orden_id,
+                        'producto_id' => $producto->producto_id,
+                        'cantidad' => $producto->cantidad,
+                        'comentario' => $producto->comentario
+                    );
+                    $this->orden_model->ordendetalle_insert($info);
+                }
+
+            }
+            $this->session->set_flashdata('success', 'Creación satisfactoria');
+        } else {
+            $this->session->set_flashdata('error', 'Creación fallida');
+        }
+        redirect('ordenListing');
+
+    }
+
+    function detalles($id)
+    {
+        $data = $this->orden_model->productosById($id);
+        json_output(200, $data);
     }
 }
 

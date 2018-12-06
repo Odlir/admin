@@ -50,7 +50,7 @@
                                         <td><?php echo $item->fecha ?></td>
                                         <td class="text-center">
                                             <a class="btn btn-sm btn-primary" href="<?= base_url().'orden'?>" title="Detalles"><i class="fa fa-info-circle"></i></a> |
-                                            <a class="btn btn-sm btn-info" href="<?php echo base_url().'documento/orden/ordenEdit/'.$item->orden_id; ?>" title="Edit"><i class="fa fa-pencil"></i></a>
+                                            <a class="btn btn-sm btn-info" href="<?php echo base_url().'documento/orden/addNew/'.$item->orden_id; ?>" title="Edit"><i class="fa fa-pencil"></i></a>
                                             <a class="btn btn-sm btn-danger deleteUser" href="#" data-userid="<?php echo $item->orden_id; ?>" title="Delete"><i class="fa fa-trash"></i></a>
                                         </td>
                                     </tr>
