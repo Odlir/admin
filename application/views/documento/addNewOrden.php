@@ -1,4 +1,4 @@
-<div class="content-wrapper" ng-app="ordenApp" ng-controller="ordenController" data-ng-init="init()">
+<div class="content-wrapper" ng-app="ordenApp" ng-controller="ordendetController"">
     <section class="content-header">
         <h1>
             <i class="fa fa-cubes"></i> Manejo de Orden de Compra

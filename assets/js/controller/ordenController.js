@@ -1,6 +1,17 @@
 
 let ordenApp = angular.module('ordenApp',[]);
 ordenApp.controller('ordenController',['$scope','$http','$filter','$window',function ($scope,$http,$filter,$window) {
+    $scope.detalles=[];
+    $scope.orden;
+    $scope.url=$('#url').val();
+    $scope.getDetalles= (orden_id,nrodocumento)=>{
+        $scope.orden=nrodocumento;
+        $http.get($scope.url+"documento/orden/detalles/"+orden_id).then(($req)=>{
+            $scope.detalles=$req.data;
+        })
+    };
+}]);
+ordenApp.controller('ordendetController',['$scope','$http','$filter','$window',function ($scope,$http,$filter,$window) {
     $scope.productos=[];
     $scope.productos_seleccionados=[];
     $scope.url=$('#url').val();

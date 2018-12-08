@@ -1,4 +1,4 @@
-<div class="content-wrapper">
+<div class="content-wrapper" ng-app="ordenApp" ng-controller="ordenController"">
     <section class="content-header">
         <h1>
             <i class="fa fa-cubes" aria-hidden="true"></i> Ordenes de Compra
@@ -31,6 +31,7 @@
                         </div>
                     </div>
                     <div class="box-body table-responsive no-padding">
+                        <input type="hidden" id="url" value="<?php echo base_url() ?>">
                         <table class="table table-hover">
                             <tr>
                                 <th>N° Documento</th>
@@ -49,7 +50,7 @@
                                         <td><?php echo $item->razonSocial ?></td>
                                         <td><?php echo $item->fecha ?></td>
                                         <td class="text-center">
-                                            <a class="btn btn-sm btn-primary" href="<?= base_url().'orden'?>" title="Detalles"><i class="fa fa-info-circle"></i></a> |
+                                            <a class="btn btn-sm btn-primary" ng-click="getDetalles(<?php echo $item->orden_id.",'$item->nrodocumento'";?>)" href="#!" title="Detalles" data-toggle="modal" data-target="#productoModal"><i class="fa fa-info-circle"></i></a> |
                                             <a class="btn btn-sm btn-info" href="<?php echo base_url().'documento/orden/addNew/'.$item->orden_id; ?>" title="Edit"><i class="fa fa-pencil"></i></a>
                                             <a class="btn btn-sm btn-danger deleteUser" href="#" data-userid="<?php echo $item->orden_id; ?>" title="Delete"><i class="fa fa-trash"></i></a>
                                         </td>
@@ -68,8 +69,48 @@
             </div>
         </div>
     </section>
+
+    <div class="modal fade" id="productoModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Detalle de la orden '{{orden}}'</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>Nro.</th>
+                            <th>Código</th>
+                            <th>Producto</th>
+                            <th>Cantidad</th>
+                            <th>Comentario</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="det in detalles">
+                            <td>{{$index+1}}</td>
+                            <td>{{det.codigo}}</td>
+                            <td>{{det.nombre}}</td>
+                            <td>{{det.cantidad}}</td>
+                            <td>{{det.comentario}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/common.js" charset="utf-8"></script>
+<script src="<?php echo base_url(); ?>assets/js/angular.min.js" type="text/javascript"></script>
+<script src="<?php echo base_url(); ?>assets/js/controller/ordenController.js" type="text/javascript"></script>
 <script type="text/javascript">
     jQuery(document).ready(function(){
         jQuery('ul.pagination li a').click(function (e) {

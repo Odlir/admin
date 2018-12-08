@@ -81,7 +81,7 @@ class Producto extends BaseController
 
     }
     function all(){
-        $data = $this->producto_model->productListing('', 10, 1);
+        $data = $this->producto_model->productListing('', 20, 1);
         json_output(200,$data);
     }
 
