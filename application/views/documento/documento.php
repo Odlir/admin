@@ -15,7 +15,7 @@
                     <div class="info-box">
                         <span class="info-box-icon bg-aqua"><i class="fa fa-cubes"></i></span>
                         <div class="info-box-content">
-                            <span class="info-box-text">Orden de Compra</span>
+                            <span class="info-box-text">Pedidos de obra</span>
                             <span class="info-box-number"><?php echo '10'; ?><small> unidades</small></span>
                         </div>
                     </div>
@@ -26,9 +26,8 @@
             <div class="col-md-3 col-sm-6 col-xs-12">
                 <div class="info-box">
                     <span class="info-box-icon bg-green"><i class="ion ion-ios-cart-outline"></i></span>
-
                     <div class="info-box-content">
-                        <span class="info-box-text">Sales</span>
+                        <span class="info-box-text">Aprobacion de Pedidos de obra</span>
                         <span class="info-box-number">760</span>
                     </div>
                 </div>

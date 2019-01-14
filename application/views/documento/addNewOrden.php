@@ -1,8 +1,8 @@
 <div class="content-wrapper" ng-app="ordenApp" ng-controller="ordendetController"">
     <section class="content-header">
         <h1>
-            <i class="fa fa-cubes"></i> Manejo de Orden de Compra
-            <small>Agregar / Editar Orden de compra</small>
+            <i class="fa fa-cubes"></i> Manejo de Pedido de obra
+            <small>Agregar / Editar Pedido de obra</small>
         </h1>
     </section>
 

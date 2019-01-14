@@ -1,7 +1,7 @@
 <div class="content-wrapper" ng-app="ordenApp" ng-controller="ordenController"">
     <section class="content-header">
         <h1>
-            <i class="fa fa-cubes" aria-hidden="true"></i> Ordenes de Compra
+            <i class="fa fa-cubes" aria-hidden="true"></i> Pedidos de obra
             <small>Listado</small>
         </h1>
     </section>
@@ -18,7 +18,7 @@
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">Listado Ordenes de compra</h3>
+                        <h3 class="box-title">Pedidos de obra</h3>
                         <div class="box-tools">
                             <form action="<?php echo base_url() ?>productListing" method="POST" id="searchList">
                                 <div class="input-group">
