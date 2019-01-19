@@ -19,6 +19,7 @@ class Producto extends BaseController
     function example(){
         echo "example";
     }
+
     function productListing()
     {
         $searchText = $this->security->xss_clean($this->input->post('searchText'));
@@ -39,20 +40,40 @@ class Producto extends BaseController
 
     }
 
-    function addNew()
+    function show($id = 0)
     {
+        $data['producto_id']=$id;
+        $data['nombre']='';
+        $data['codigo']='';
+        $data['marca']='';
+        $data['unidad_id']='';
+        $data['familia_id']='';
+        $data['comentario']='';
 
-            $data['unidades'] = $this->producto_model->getUnidadesMedida();
+        $data['url_action']='addProduct';
+        $title='OdLir: Agregar Nuevo Producto';
+        if ($id != 0){
+            $data['url_action']='editProduct';
+            $title='OdLir: Modificar Producto';
 
-            $data['familias'] = $this->producto_model->getFamilias();
+            $producto= $this->producto_model->get($id);
 
-            $this->global['pageTitle'] = 'OdLir :Agregar Nuevo Producto';
+            $data['nombre']=$producto->nombre;
+            $data['codigo']=$producto->codigo;
+            $data['marca']=$producto->marca;
+            $data['unidad_id']=$producto->unidad;
+            $data['familia_id']=$producto->familia;
+            $data['comentario']=$producto->comentario;
+        }
 
-            $this->loadViews("inventario/addNewProducto", $this->global, $data, NULL);
+        $data['unidades'] = $this->producto_model->getUnidadesMedida();
+        $data['familias'] = $this->producto_model->getFamilias();
 
+        $this->global['pageTitle'] = $title;
+        $this->loadViews("inventario/addNewProducto", $this->global, $data, NULL);
     }
 
-    function addNewProduct()
+    function add()
     {
         $nombre = $this->input->post('nombre');
         $codigo = $this->input->post('codigo');
@@ -63,28 +84,66 @@ class Producto extends BaseController
         $marca = $this->input->post('marca');
         $comentario = $this->input->post('comentario');
 
-        $productInfo = array('nombre'=>$nombre, 'codigo'=>$codigo, 'unidad'=>$unidad, 'familia'=> $familia,
-            'documento'=>$documento, 'imagen'=>$image, 'marca'=>$marca, 'comentario'=>$comentario);
-
-        $result = $this->producto_model->addNewProduct($productInfo);
+        $info = array(
+            'nombre'=>$nombre,
+            'codigo'=>$codigo,
+            'unidad'=>$unidad,
+            'familia'=> $familia,
+            'documento'=>$documento,
+            'imagen'=>$image,
+            'marca'=>$marca,
+            'comentario'=>$comentario);
+        $result = $this->producto_model->insert($info);
 
         if($result > 0)
         {
-            $this->session->set_flashdata('success', 'New User created successfully');
+            $this->session->set_flashdata('success', 'creación satisfactoria');
         }
         else
         {
-            $this->session->set_flashdata('error', 'User creation failed');
+            $this->session->set_flashdata('error', 'Creación fallida');
         }
-
         redirect('productListing');
-
     }
+
+    function edit(){
+        $producto_id = $this->input->post('producto_id');
+        $nombre = $this->input->post('nombre');
+        $codigo = $this->input->post('codigo');
+        $unidad = $this->input->post('unidad');
+        $familia = $this->input->post('familia');
+        $documento = $this->input->post('documento');
+        $image = $this->input->post('image');
+        $marca = $this->input->post('marca');
+        $comentario = $this->input->post('comentario');
+
+        $info = array(
+            'nombre'=>$nombre,
+            'codigo'=>$codigo,
+            'unidad'=>$unidad,
+            'familia'=> $familia,
+            'documento'=>$documento,
+            'imagen'=>$image,
+            'marca'=>$marca,
+            'comentario'=>$comentario);
+
+        $result = $this->producto_model->update($producto_id, $info);
+
+        if($result > 0)
+        {
+            $this->session->set_flashdata('success', 'Edición satisfactoria');
+        }
+        else
+        {
+            $this->session->set_flashdata('error', 'Edición fallida');
+        }
+        redirect('productListing');
+    }
+
     function all(){
         $data = $this->producto_model->productListing('', 20, 1);
         json_output(200,$data);
     }
-
 
 }
 

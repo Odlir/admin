@@ -87,18 +87,31 @@ $route['resetPasswordConfirmUser'] = "login/resetPasswordConfirmUser";
 $route['resetPasswordConfirmUser/(:any)'] = "login/resetPasswordConfirmUser/$1";
 $route['resetPasswordConfirmUser/(:any)/(:any)'] = "login/resetPasswordConfirmUser/$1/$2";
 $route['createPasswordUser'] = "login/createPasswordUser";
-//Inventario
+
+/****Inventario****/
 $route['inventario'] = 'inventario/inventario';
+
+//producto
 $route['productListing'] = 'inventario/producto/productListing';
 $route['productListing/(:num)'] = 'inventario/producto/productListing/$1';
-$route['addNewProduct'] = "inventario/producto/addNewProduct";
+$route['addProduct'] = "inventario/producto/add";
+$route['editProduct'] = "inventario/producto/edit";
 
-//documento
+/****documento****/
 $route['documento'] = 'documento/documento';
+
+//orden de compra
 $route['ordenListing'] = 'documento/orden/ordenListing';
 $route['ordenListing/(:num)'] = 'documento/orden/ordenListing/$1';
-$route['addOrden'] = "documento/orden/addOrden";
-$route['editOrden'] = "documento/orden/editOrden";
+$route['addOrden'] = "documento/orden/add";
+$route['editOrden'] = "documento/orden/edit";
+
+//proveedor
+$route['proveedorListing'] = 'documento/proveedor/proveedorListing';
+$route['proveedorListing/(:num)'] = 'documento/proveedor/proveedorListing/$1';
+$route['addProveedor'] = "documento/proveedor/add";
+$route['editProveedor'] = "documento/proveedor/edit";
+
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

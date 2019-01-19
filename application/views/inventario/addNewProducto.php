@@ -16,20 +16,22 @@
                         <h3 class="box-title">Ingresar Detalles del Producto</h3>
                     </div>
                     <?php $this->load->helper("form"); ?>
-                    <form role="form" id="addUser" action="<?php echo base_url() ?>addNewProduct" method="post" role="form">
+                    <form role="form" id="addUser" action="<?php echo base_url().$url_action?>" method="post" role="form">
+                        <input type="hidden" id="url" value="<?php echo base_url() ?>">
+                        <input type="hidden" id="producto_id" name="producto_id" value="<?php echo $producto_id;?>" />
                         <div class="box-body">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="nombre">Nombre: *</label>
-                                        <input type="text" class="form-control required" value="<?php  ?>" id="nombre" name="nombre" maxlength="128">
+                                        <input type="text" class="form-control required" value="<?php echo $nombre; ?>" id="nombre" name="nombre" maxlength="128">
                                     </div>
                                     
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="codigo">Codigo: </label>
-                                        <input type="text" class="form-control required" id="codigo" value="<?php  ?>" name="codigo" maxlength="128">
+                                        <input type="text" class="form-control required" id="codigo" value="<?php echo $codigo; ?>" name="codigo" maxlength="128">
                                     </div>
                                 </div>
                             </div>
@@ -37,7 +39,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="marca">Marca: </label>
-                                        <input type="text" class="form-control required" id="marca" name="marca" maxlength="20">
+                                        <input type="text" class="form-control required" id="marca" name="marca" maxlength="20" value="<?php echo $marca; ?>">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -83,7 +85,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="documento">Documento tecnico: </label>
-                                        <input type="file" class="form-control" id="documento" value=" ?>" name="documento" maxlength="128">
+                                        <input type="file" class="form-control" id="documento" name="documento" maxlength="128">
                                     </div>
                                 </div>
                             </div>
@@ -91,7 +93,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="image">Imagen: </label>
-                                        <input type="file" class="form-control" value="<?php ?>" id="image" name="image" maxlength="128">
+                                        <input type="file" class="form-control" id="image" name="image" maxlength="128">
                                     </div>
 
                                 </div>
@@ -100,7 +102,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="mobile">Comentario: </label>
-                                        <input type="text" class="form-control" id="comentario" value="<?php  ?>" name="comentario" maxlength="200">
+                                        <input type="text" class="form-control" id="comentario" value="<?php echo $comentario?>" name="comentario" maxlength="200">
                                     </div>
                                 </div>
                             </div>
@@ -147,4 +149,9 @@
     </section>
     
 </div>
-<script src="<?php echo base_url(); ?>assets/js/addUser.js" type="text/javascript"></script>
+<script >
+    $(function () {
+        $('#familia').val("<?php echo $familia_id;?>");
+        $('#unidad').val("<?php echo $unidad_id;?>");
+    });
+</script>

@@ -23,7 +23,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="nrodocumento">Obra:*</label>
+                                        <label for="nrodocumento">Obra (centro de costo):*</label>
                                         <input type="text" class="form-control required" value="<?php echo $nrodocumento;?>" name="nrodocumento" maxlength="128">
                                     </div>
                                 </div>
@@ -51,7 +51,7 @@
                                                 foreach ($proveedor as $f)
                                                 {
                                                     ?>
-                                                    <option value="<?php echo $f->proveedorId ?>"><?php echo $f->razonSocial?></option>
+                                                    <option value="<?php echo $f->proveedor_id ?>"><?php echo $f->razonsocial?></option>
                                                     <?php
                                                 }
                                             }
@@ -180,8 +180,6 @@
 <script src="<?php echo base_url(); ?>assets/js/controller/ordenController.js" type="text/javascript"></script>
 <script >
     $(function () {
-        //$('#datetimepicker').datepicker({format: 'dd/mm/yyyy'});
-
         $('#proveedor').val("<?php echo $proveedor_id;?>");
     });
 </script>

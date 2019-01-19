@@ -7,8 +7,8 @@ class Producto_model extends CI_Model
     {
         $this->db->select('p.*, u.nombre as nombre_producto, f.nombre as nombre_familia');
         $this->db->from('tbl_productos as p');
-        $this->db->join('tbl_unidades u','u.unidad_id = p.unidad');
-        $this->db->join('tbl_familia f','f.familia_id = p.familia');
+        $this->db->join('tbl_unidades u','u.unidad_id = p.unidad','left');
+        $this->db->join('tbl_familia f','f.familia_id = p.familia','left');
         if(!empty($searchText)) {
             $likeCriteria = "(p.nombre  LIKE '%".$searchText."%'
                             OR  p.codigo  LIKE '%".$searchText."%'
@@ -40,31 +40,20 @@ class Producto_model extends CI_Model
         return $query->num_rows();
     }
 
-    function userListing($searchText = '', $page, $segment)
-    {
-        $this->db->select('BaseTbl.userId, BaseTbl.email, BaseTbl.name, BaseTbl.mobile, BaseTbl.createdDtm, Role.role');
-        $this->db->from('tbl_users as BaseTbl');
-        $this->db->join('tbl_roles as Role', 'Role.roleId = BaseTbl.roleId','left');
-        if(!empty($searchText)) {
-            $likeCriteria = "(BaseTbl.email  LIKE '%".$searchText."%'
-                            OR  BaseTbl.name  LIKE '%".$searchText."%'
-                            OR  BaseTbl.mobile  LIKE '%".$searchText."%')";
-            $this->db->where($likeCriteria);
-        }
-        $this->db->where('BaseTbl.isDeleted', 0);
-        $this->db->where('BaseTbl.roleId !=', 1);
-        $this->db->order_by('BaseTbl.userId', 'DESC');
-        $this->db->limit($page, $segment);
+    function get($id){
+        $this->db->select('nombre,codigo,marca,unidad,familia,comentario,documento,imagen');
+        $this->db->from('tbl_productos');
+        $this->db->where('producto_id', $id);
         $query = $this->db->get();
-
-        $result = $query->result();
-        return $result;
+        if ($query->num_rows() > 0) {
+            return $query->row();
+        }
     }
 
-    function addNewProduct($productInfo)
+    function insert($info)
     {
         $this->db->trans_start();
-        $this->db->insert('tbl_productos', $productInfo);
+        $this->db->insert('tbl_productos', $info);
 
         $insert_id = $this->db->insert_id();
 
@@ -72,7 +61,12 @@ class Producto_model extends CI_Model
 
         return $insert_id;
     }
-
+    function update($id,$info)
+    {
+        $where = array("producto_id"=>$id);
+        $this->db->where($where);
+        return $this->db->update('tbl_productos',$info);
+    }
 
     function getUnidadesMedida()
     {

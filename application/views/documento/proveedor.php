@@ -1,7 +1,7 @@
 <div class="content-wrapper">
     <section class="content-header">
         <h1>
-            <i class="fa fa-cubes" aria-hidden="true"></i> Productos
+            <i class="fa fa-cubes" aria-hidden="true"></i> Proveedores
             <small>Listado</small>
         </h1>
     </section>
@@ -10,7 +10,7 @@
         <div class="row">
             <div class="col-xs-12 text-right">
                 <div class="form-group">
-                    <a class="btn btn-primary" href="<?php echo base_url(); ?>inventario/producto/show"><i class="fa fa-plus"></i> Crear Nuevo Producto</a>
+                    <a class="btn btn-primary" href="<?php echo base_url(); ?>documento/proveedor/show"><i class="fa fa-plus"></i> Crear Nuevo Proveedor</a>
                 </div>
             </div>
         </div>
@@ -18,9 +18,9 @@
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">Listado Productos</h3>
+                        <h3 class="box-title">Listado de proveedores</h3>
                         <div class="box-tools">
-                            <form action="<?php echo base_url() ?>productListing" method="POST" id="searchList">
+                            <form action="<?php echo base_url() ?>proveedorListing" method="POST" id="searchList">
                                 <div class="input-group">
                                     <input type="text" name="searchText" value="<?php echo $searchText; ?>" class="form-control input-sm pull-right" style="width: 150px;" placeholder="Search"/>
                                     <div class="input-group-btn">
@@ -33,29 +33,27 @@
                     <div class="box-body table-responsive no-padding">
                         <table class="table table-hover">
                             <tr>
-                                <th>Nombre</th>
-                                <th>Codigo</th>
-                                <th>Marca</th>
-                                <th>Unidad</th>
-                                <th>Familia</th>
-                                <th class="text-center">Actions</th>
+                                <th>Razón Social</th>
+                                <th>RUC</th>
+                                <th>Email</th>
+                                <th>Dirección</th>
+                                <th class="text-center">Acciones</th>
                             </tr>
                             <?php
-                            if(!empty($productoRecords))
+                            if(!empty($records))
                             {
-                                foreach($productoRecords as $record)
+                                foreach($records as $record)
                                 {
                                     ?>
                                     <tr>
-                                        <td><?php echo $record->nombre ?></td>
-                                        <td><?php echo $record->codigo ?></td>
-                                        <td><?php echo $record->marca ?></td>
-                                        <td><?php echo $record->nombre_producto ?></td>
-                                        <td><?php echo $record->nombre_familia ?></td>
+                                        <td><?php echo $record->razonsocial ?></td>
+                                        <td><?php echo $record->ruc ?></td>
+                                        <td><?php echo $record->email ?></td>
+                                        <td><?php echo $record->direccion ?></td>
                                         <td class="text-center">
                                             <a class="btn btn-sm btn-primary" href="#!" title="Detalles"><i class="fa fa-info-circle"></i></a> |
-                                            <a class="btn btn-sm btn-info" href="<?php echo base_url().'inventario/producto/show/'.$record->producto_id; ?>" title="Edit"><i class="fa fa-pencil"></i></a>
-                                            <a class="btn btn-sm btn-danger deleteUser" href="#" data-userid="<?php echo $record->producto_id; ?>" title="Delete"><i class="fa fa-trash"></i></a>
+                                            <a class="btn btn-sm btn-info" href="<?php echo base_url().'documento/proveedor/show/'.$record->proveedor_id; ?>" title="Edit"><i class="fa fa-pencil"></i></a>
+                                            <a class="btn btn-sm btn-danger deleteUser" href="#" data-userid="<?php ?>" title="Delete"><i class="fa fa-trash"></i></a>
                                         </td>
                                     </tr>
                                     <?php
@@ -80,7 +78,7 @@
             e.preventDefault();
             var link = jQuery(this).get(0).href;
             var value = link.substring(link.lastIndexOf('/') + 1);
-            jQuery("#searchList").attr("action", baseURL + "productListing/" + value);
+            jQuery("#searchList").attr("action", baseURL + "proveedorListing/" + value);
             jQuery("#searchList").submit();
         });
     });

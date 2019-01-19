@@ -1,7 +1,7 @@
 <div class="content-wrapper" ng-app="ordenApp" ng-controller="ordenController"">
     <section class="content-header">
         <h1>
-            <i class="fa fa-cubes" aria-hidden="true"></i> Ordenes de Compra
+            <i class="fa fa-cubes" aria-hidden="true"></i> Pedido de Obra
             <small>Listado</small>
         </h1>
     </section>
@@ -10,7 +10,7 @@
         <div class="row">
             <div class="col-xs-12 text-right">
                 <div class="form-group">
-                    <a class="btn btn-primary" href="<?php echo base_url(); ?>documento/orden/addNew"><i class="fa fa-plus"></i> Crear Nueva Orden</a>
+                    <a class="btn btn-primary" href="<?php echo base_url(); ?>documento/orden/show"><i class="fa fa-plus"></i> Crear pedido</a>
                 </div>
             </div>
         </div>
@@ -18,7 +18,7 @@
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">Listado Ordenes de compra</h3>
+                        <h3 class="box-title">Listado pedido de obra</h3>
                         <div class="box-tools">
                             <form action="<?php echo base_url() ?>productListing" method="POST" id="searchList">
                                 <div class="input-group">
@@ -34,8 +34,10 @@
                         <input type="hidden" id="url" value="<?php echo base_url() ?>">
                         <table class="table table-hover">
                             <tr>
-                                <th>N° Documento</th>
+                                <th>Correlativo</th>
+                                <th>Obra</th>
                                 <th>Proveedor</th>
+                                <th>Usuario</th>
                                 <th>Fecha</th>
                                 <th class="text-center">Actions</th>
                             </tr>
@@ -46,12 +48,14 @@
                                 {
                                     ?>
                                     <tr>
+                                        <td><?php echo sprintf("%09d",$item->orden_id) ?></td>
                                         <td><?php echo $item->nrodocumento ?></td>
-                                        <td><?php echo $item->razonSocial ?></td>
+                                        <td><?php echo $item->razonsocial ?></td>
+                                        <td><?php echo $item->usuario ?></td>
                                         <td><?php echo $item->fecha ?></td>
                                         <td class="text-center">
                                             <a class="btn btn-sm btn-primary" ng-click="getDetalles(<?php echo $item->orden_id.",'$item->nrodocumento'";?>)" href="#!" title="Detalles" data-toggle="modal" data-target="#productoModal"><i class="fa fa-info-circle"></i></a> |
-                                            <a class="btn btn-sm btn-info" href="<?php echo base_url().'documento/orden/addNew/'.$item->orden_id; ?>" title="Edit"><i class="fa fa-pencil"></i></a>
+                                            <a class="btn btn-sm btn-info" href="<?php echo base_url().'documento/orden/show/'.$item->orden_id; ?>" title="Edit"><i class="fa fa-pencil"></i></a>
                                             <a class="btn btn-sm btn-danger deleteUser" href="#" data-userid="<?php echo $item->orden_id; ?>" title="Delete"><i class="fa fa-trash"></i></a>
                                         </td>
                                     </tr>

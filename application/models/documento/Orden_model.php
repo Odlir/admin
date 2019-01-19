@@ -4,9 +4,10 @@ class Orden_model extends CI_Model
 {
     function ordenListing($searchText = '', $page, $segment)
     {
-        $this->db->select('o.orden_id, o.nrodocumento, o.proveedor_id,p.razonSocial, DATE_FORMAT(o.fecha,\'%d/%m/%Y\') as fecha');
+        $this->db->select('o.orden_id, o.nrodocumento, o.proveedor_id, u.name as usuario, p.razonsocial, DATE_FORMAT(o.fecha,\'%d/%m/%Y\') as fecha');
         $this->db->from('tbl_orden as o');
-        $this->db->join('tbl_proveedor p','p.proveedorId=o.proveedor_id');
+        $this->db->join('tbl_proveedor p','p.proveedor_id=o.proveedor_id');
+        $this->db->join('tbl_users u','u.userId=o.created_by','left');
         if(!empty($searchText)) {
             $likeCriteria = "(o.nrodocumento LIKE '%".$searchText."%')";
             $this->db->where($likeCriteria);

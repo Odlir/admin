@@ -37,7 +37,7 @@ class Orden extends BaseController
 
     }
 
-    function addNew($id = 0)
+    function show($id = 0)
     {
         $data['orden_id'] = $id;
         $data['nrodocumento'] = '';
@@ -45,8 +45,10 @@ class Orden extends BaseController
         $data['comentario'] = '';
         $data['proveedor_id'] = 0;
         $data['url_action']='addOrden';
+        $title = 'OdLir: Agregar Nuevo Orden';
         if ($id != 0) {
             $data['url_action']='editOrden';
+            $title = 'OdLir: Modificar Orden';
 
             $orden = $this->orden_model->get($id);
 
@@ -58,13 +60,11 @@ class Orden extends BaseController
 
         $data['proveedor'] = $this->orden_model->getProveedores();
 
-        $this->global['pageTitle'] = 'OdLir :Agregar Nuevo Orden';
-
+        $this->global['pageTitle'] = $title;
         $this->loadViews("documento/addNewOrden", $this->global, $data, NULL);
-
     }
 
-    function addOrden()
+    function add()
     {
         $nrodocumento = $this->input->post('nrodocumento');
         $proveedor = $this->input->post('proveedor');
@@ -75,6 +75,7 @@ class Orden extends BaseController
             'nrodocumento' => $nrodocumento,
             'proveedor_id' => $proveedor,
             'activo' => 1,
+            'created_by'=>1,
             'comentario' => $comentario);
 
         $orden_id = $this->orden_model->orden_insert($info);
@@ -93,7 +94,8 @@ class Orden extends BaseController
         }
         redirect('ordenListing');
     }
-    function editOrden()
+
+    function edit()
     {
         $orden_id = $this->input->post('orden_id');
         $nrodocumento = $this->input->post('nrodocumento');
@@ -129,12 +131,11 @@ class Orden extends BaseController
                 }
 
             }
-            $this->session->set_flashdata('success', 'Creación satisfactoria');
+            $this->session->set_flashdata('success', 'Edición satisfactoria');
         } else {
-            $this->session->set_flashdata('error', 'Creación fallida');
+            $this->session->set_flashdata('error', 'Edición fallida');
         }
         redirect('ordenListing');
-
     }
 
     function detalles($id)
