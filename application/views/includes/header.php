@@ -36,7 +36,7 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
     <script type="text/javascript">
-        var baseURL = "<?php echo base_url(); ?>";
+        let baseURL = "<?php echo base_url(); ?>";
     </script>
 
 

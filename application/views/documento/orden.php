@@ -10,7 +10,7 @@
         <div class="row">
             <div class="col-xs-12 text-right">
                 <div class="form-group">
-                    <a class="btn btn-primary" href="<?php echo base_url(); ?>documento/orden/addNew"><i class="fa fa-plus"></i> Crear Nueva Orden</a>
+                    <a class="btn btn-primary" href="<?php echo base_url(); ?>documento/orden/show"><i class="fa fa-plus"></i> Crear Nueva Orden</a>
                 </div>
             </div>
         </div>
@@ -34,9 +34,11 @@
                         <input type="hidden" id="url" value="<?php echo base_url() ?>">
                         <table class="table table-hover">
                             <tr>
-                                <th>N° Documento</th>
+                                <th>Correlativo</th>
+                                <th>Obra</th>
                                 <th>Proveedor</th>
                                 <th>Fecha</th>
+                                <th>Usuario</th>
                                 <th class="text-center">Actions</th>
                             </tr>
                             <?php
@@ -46,13 +48,15 @@
                                 {
                                     ?>
                                     <tr>
+                                        <td><?php echo sprintf('%09d',  $item->orden_id) ?></td>
                                         <td><?php echo $item->nrodocumento ?></td>
-                                        <td><?php echo $item->razonSocial ?></td>
+                                        <td><?php echo $item->razonsocial ?></td>
                                         <td><?php echo $item->fecha ?></td>
+                                        <td><?php echo $item->usuario ?></td>
                                         <td class="text-center">
                                             <a class="btn btn-sm btn-primary" ng-click="getDetalles(<?php echo $item->orden_id.",'$item->nrodocumento'";?>)" href="#!" title="Detalles" data-toggle="modal" data-target="#productoModal"><i class="fa fa-info-circle"></i></a> |
-                                            <a class="btn btn-sm btn-info" href="<?php echo base_url().'documento/orden/addNew/'.$item->orden_id; ?>" title="Edit"><i class="fa fa-pencil"></i></a>
-                                            <a class="btn btn-sm btn-danger deleteUser" href="#" data-userid="<?php echo $item->orden_id; ?>" title="Delete"><i class="fa fa-trash"></i></a>
+                                            <a class="btn btn-sm btn-info" href="<?php echo base_url().'documento/orden/show/'.$item->orden_id; ?>" title="Edit"><i class="fa fa-pencil"></i></a>
+                                            <a class="btn btn-sm btn-danger deleteOrden" href="#" data-id="<?php echo $item->orden_id; ?>"><i class="fa fa-trash"></i></a>
                                         </td>
                                     </tr>
                                     <?php
@@ -74,12 +78,40 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Detalle de la orden <strong>'{{orden}}'</strong></h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Detalle de pedido de obra</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
+
+                    <form>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Obra</label>
+                            <div class="col-sm-10">
+                                <input type="text" readonly class="form-control-plaintext" value="{{orden}}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Proveedor</label>
+                            <div class="col-sm-10">
+                                <input type="text" readonly class="form-control-plaintext" value="{{proveedor}}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Fecha</label>
+                            <div class="col-sm-10">
+                                <input type="text" readonly class="form-control-plaintext" value="{{fecha}}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Usuario Creación</label>
+                            <div class="col-sm-10">
+                                <input type="text" readonly class="form-control-plaintext" value="{{usuario}}">
+                            </div>
+                        </div>
+                    </form>
+
                     <table class="table table-hover">
                         <thead>
                         <tr>
@@ -108,7 +140,6 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/common.js" charset="utf-8"></script>
 <script src="<?php echo base_url(); ?>assets/js/angular.min.js" type="text/javascript"></script>
 <script src="<?php echo base_url(); ?>assets/js/controller/ordenController.js" type="text/javascript"></script>
 <script type="text/javascript">

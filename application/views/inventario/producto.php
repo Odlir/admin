@@ -1,4 +1,4 @@
-<div class="content-wrapper">
+<div class="content-wrapper" ng-app="myApp" ng-controller="productoController"">
     <section class="content-header">
         <h1>
             <i class="fa fa-cubes" aria-hidden="true"></i> Productos
@@ -53,9 +53,9 @@
                                         <td><?php echo $record->nombre_producto ?></td>
                                         <td><?php echo $record->nombre_familia ?></td>
                                         <td class="text-center">
-                                            <a class="btn btn-sm btn-primary" href="#!" title="Detalles"><i class="fa fa-info-circle"></i></a> |
+                                            <a class="btn btn-sm btn-primary" ng-click="getDetalles(<?php echo $record->producto_id;?>)" href="#!" title="Detalles" data-toggle="modal" data-target="#detalleModal"><i class="fa fa-info-circle"></i></a> |
                                             <a class="btn btn-sm btn-info" href="<?php echo base_url().'inventario/producto/show/'.$record->producto_id; ?>" title="Edit"><i class="fa fa-pencil"></i></a>
-                                            <a class="btn btn-sm btn-danger deleteUser" href="#" data-userid="<?php echo $record->producto_id; ?>" title="Delete"><i class="fa fa-trash"></i></a>
+                                            <a class="btn btn-sm btn-danger deleteProduct" href="#" data-id="<?php echo $record->producto_id; ?>" ><i class="fa fa-trash"></i></a>
                                         </td>
                                     </tr>
                                     <?php
@@ -72,8 +72,66 @@
             </div>
         </div>
     </section>
+<div class="modal fade" id="detalleModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Detalle del Proveedor</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <form>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Código</label>
+                        <div class="col-sm-10">
+                            <input type="text" readonly class="form-control-plaintext" value="{{codigo}}">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Nombre</label>
+                        <div class="col-sm-10">
+                            <input type="text" readonly class="form-control-plaintext" value="{{nombre}}">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Familia</label>
+                        <div class="col-sm-10">
+                            <input type="text" readonly class="form-control-plaintext" value="{{familia}}">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Marca</label>
+                        <div class="col-sm-10">
+                            <input type="text" readonly class="form-control-plaintext" value="{{marca}}">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Unidad</label>
+                        <div class="col-sm-10">
+                            <input type="text" readonly class="form-control-plaintext" value="{{unidad}}">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Comentario</label>
+                        <div class="col-sm-10">
+                            <input type="text" readonly class="form-control-plaintext" value="{{comentario}}">
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
 </div>
-<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/common.js" charset="utf-8"></script>
+</div>
+<script src="<?php echo base_url(); ?>assets/js/angular.min.js" type="text/javascript"></script>
+<script src="<?php echo base_url(); ?>assets/js/controller/productoController.js" type="text/javascript"></script>
 <script type="text/javascript">
     jQuery(document).ready(function(){
         jQuery('ul.pagination li a').click(function (e) {

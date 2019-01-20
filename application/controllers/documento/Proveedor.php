@@ -62,6 +62,17 @@ class Proveedor extends BaseController
         $this->loadViews("documento/addNewProveedor", $this->global, $data, NULL);
     }
 
+    function detalles($id){
+        $item = $this->proveedor_model->get($id);
+        $data=array(
+            'ruc'=>$item->ruc,
+            'razonsocial'=>$item->razonsocial,
+            'email'=>$item->email,
+            'direccion'=>$item->direccion
+        );
+        json_output(200, $data);
+    }
+
     function add()
     {
         $ruc = $this->input->post('ruc');
@@ -118,7 +129,22 @@ class Proveedor extends BaseController
         $data = $this->proveedor_model->proveedorListing('', 20, 1);
         json_output(200,$data);
     }
+    function delete(){
+        /*if($this->isAdmin() == TRUE)
+        {
+            echo(json_encode(array('status'=>'access')));
+        }
+        else
+        {*/
+        $id = $this->input->post('id');
+        $info = array('activo'=>0);
 
+        $result = $this->proveedor_model->delete($id, $info);
+
+        if ($result > 0) { echo(json_encode(array('status'=>TRUE))); }
+        else { echo(json_encode(array('status'=>FALSE))); }
+        //}
+    }
 }
 
 ?>

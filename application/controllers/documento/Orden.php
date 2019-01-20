@@ -64,6 +64,19 @@ class Orden extends BaseController
         $this->loadViews("documento/addNewOrden", $this->global, $data, NULL);
     }
 
+    function detalles($id)
+    {
+        $orden = $this->orden_model->get($id);
+        $data =array(
+            'proveedor'=>$orden->proveedor,
+            'fecha'=>$orden->fecha,
+            'usuario'=>$orden->usuario,
+            'comentario'=>$orden->comentario,
+            'detalles'=> $this->orden_model->productosById($id)
+        );
+        json_output(200, $data);
+    }
+
     function add()
     {
         $nrodocumento = $this->input->post('nrodocumento');
@@ -138,10 +151,21 @@ class Orden extends BaseController
         redirect('ordenListing');
     }
 
-    function detalles($id)
-    {
-        $data = $this->orden_model->productosById($id);
-        json_output(200, $data);
+    function delete(){
+        /*if($this->isAdmin() == TRUE)
+        {
+            echo(json_encode(array('status'=>'access')));
+        }
+        else
+        {*/
+        $id = $this->input->post('id');
+        $info = array('activo'=>0);
+
+        $result = $this->orden_model->delete($id, $info);
+
+        if ($result > 0) { echo(json_encode(array('status'=>TRUE))); }
+        else { echo(json_encode(array('status'=>FALSE))); }
+        //}
     }
 }
 

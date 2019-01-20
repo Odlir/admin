@@ -41,9 +41,11 @@ class Producto_model extends CI_Model
     }
 
     function get($id){
-        $this->db->select('nombre,codigo,marca,unidad,familia,comentario,documento,imagen');
-        $this->db->from('tbl_productos');
-        $this->db->where('producto_id', $id);
+        $this->db->select('p.nombre,p.codigo,p.marca,p.unidad,p.familia,p.comentario,p.documento,p.imagen,f.nombre familia2,u.nombre unidad2');
+        $this->db->from('tbl_productos p');
+        $this->db->join('tbl_unidades u','u.unidad_id = p.unidad','left');
+        $this->db->join('tbl_familia f','f.familia_id = p.familia','left');
+        $this->db->where('p.producto_id', $id);
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
             return $query->row();
@@ -62,6 +64,12 @@ class Producto_model extends CI_Model
         return $insert_id;
     }
     function update($id,$info)
+    {
+        $where = array("producto_id"=>$id);
+        $this->db->where($where);
+        return $this->db->update('tbl_productos',$info);
+    }
+    function delete($id,$info)
     {
         $where = array("producto_id"=>$id);
         $this->db->where($where);

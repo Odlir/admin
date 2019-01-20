@@ -73,6 +73,20 @@ class Producto extends BaseController
         $this->loadViews("inventario/addNewProducto", $this->global, $data, NULL);
     }
 
+    function detalles($id)
+    {
+        $item = $this->producto_model->get($id);
+        $data = array(
+            'codigo' => $item->codigo,
+            'nombre' => $item->nombre,
+            'familia' => $item->familia2,
+            'marca' => $item->marca,
+            'unidad' => $item->unidad2,
+            'comentario' => $item->comentario,
+        );
+        json_output(200, $data);
+    }
+
     function add()
     {
         $nombre = $this->input->post('nombre');
@@ -143,6 +157,23 @@ class Producto extends BaseController
     function all(){
         $data = $this->producto_model->productListing('', 20, 1);
         json_output(200,$data);
+    }
+
+    function delete(){
+        /*if($this->isAdmin() == TRUE)
+        {
+            echo(json_encode(array('status'=>'access')));
+        }
+        else
+        {*/
+            $id = $this->input->post('id');
+            $info = array('activo'=>0);
+
+            $result = $this->producto_model->delete($id, $info);
+
+            if ($result > 0) { echo(json_encode(array('status'=>TRUE))); }
+            else { echo(json_encode(array('status'=>FALSE))); }
+        //}
     }
 
 }

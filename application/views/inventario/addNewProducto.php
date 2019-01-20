@@ -82,20 +82,28 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="documento">Documento tecnico: </label>
-                                        <input type="file" class="form-control" id="documento" name="documento" maxlength="128">
-                                    </div>
-                                </div>
+
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="image">Imagen: </label>
                                         <input type="file" class="form-control" id="image" name="image" maxlength="128">
-                                    </div>
 
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <img src="" class="img-thumbnail" height="200" width="200">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="documento">Documento tecnico: </label>
+                                        <input type="file" class="form-control" id="documento" name="documento" maxlength="128">
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">
@@ -106,8 +114,9 @@
                                     </div>
                                 </div>
                             </div>
+
                         </div>
-    
+
                         <div class="box-footer text-right">
                             <a href="<?php echo base_url();?>productListing" class="btn btn-warning text-left">Regresar</a>
                             <input type="reset" class="btn btn-default" value="Limpiar" />

@@ -1,4 +1,4 @@
-<div class="content-wrapper">
+<div class="content-wrapper" ng-app="myApp" ng-controller="proveedorController"">
     <section class="content-header">
         <h1>
             <i class="fa fa-cubes" aria-hidden="true"></i> Proveedores
@@ -31,6 +31,7 @@
                         </div>
                     </div>
                     <div class="box-body table-responsive no-padding">
+                        <input type="hidden" id="url" value="<?php echo base_url() ?>">
                         <table class="table table-hover">
                             <tr>
                                 <th>Razón Social</th>
@@ -51,9 +52,9 @@
                                         <td><?php echo $record->email ?></td>
                                         <td><?php echo $record->direccion ?></td>
                                         <td class="text-center">
-                                            <a class="btn btn-sm btn-primary" href="#!" title="Detalles"><i class="fa fa-info-circle"></i></a> |
+                                            <a class="btn btn-sm btn-primary" ng-click="getDetalles(<?php echo $record->proveedor_id;?>)" href="#!" title="Detalles" data-toggle="modal" data-target="#detalleModal"><i class="fa fa-info-circle"></i></a> |
                                             <a class="btn btn-sm btn-info" href="<?php echo base_url().'documento/proveedor/show/'.$record->proveedor_id; ?>" title="Edit"><i class="fa fa-pencil"></i></a>
-                                            <a class="btn btn-sm btn-danger deleteUser" href="#" data-userid="<?php ?>" title="Delete"><i class="fa fa-trash"></i></a>
+                                            <a class="btn btn-sm btn-danger deleteProveedor" href="#" data-id="<?php echo $record->proveedor_id;?>" title="Delete"><i class="fa fa-trash"></i></a>
                                         </td>
                                     </tr>
                                     <?php
@@ -70,8 +71,55 @@
             </div>
         </div>
     </section>
+
+    <div class="modal fade" id="detalleModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Detalle del Proveedor</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <form>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">RUC</label>
+                            <div class="col-sm-10">
+                                <input type="text" readonly class="form-control-plaintext" value="{{ruc}}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Razón social</label>
+                            <div class="col-sm-10">
+                                <input type="text" readonly class="form-control-plaintext" value="{{razonsocial}}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Email</label>
+                            <div class="col-sm-10">
+                                <input type="text" readonly class="form-control-plaintext" value="{{email}}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Dirección</label>
+                            <div class="col-sm-10">
+                                <input type="text" readonly class="form-control-plaintext" value="{{direccion}}">
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/common.js" charset="utf-8"></script>
+<script src="<?php echo base_url(); ?>assets/js/angular.min.js" type="text/javascript"></script>
+<script src="<?php echo base_url(); ?>assets/js/controller/proveedorController.js" type="text/javascript"></script>
 <script type="text/javascript">
     jQuery(document).ready(function(){
         jQuery('ul.pagination li a').click(function (e) {

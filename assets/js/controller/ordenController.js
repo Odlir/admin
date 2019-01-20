@@ -3,11 +3,18 @@ let ordenApp = angular.module('ordenApp',[]);
 ordenApp.controller('ordenController',['$scope','$http','$filter','$window',function ($scope,$http,$filter,$window) {
     $scope.detalles=[];
     $scope.orden;
+    $scope.proveedor;
+    $scope.fecha;
+    $scope.usuario;
     $scope.url=$('#url').val();
     $scope.getDetalles= (orden_id,nrodocumento)=>{
         $scope.orden=nrodocumento;
         $http.get($scope.url+"documento/orden/detalles/"+orden_id).then(($req)=>{
-            $scope.detalles=$req.data;
+            //console.log($req.data);
+            $scope.proveedor=$req.data.proveedor;
+            $scope.fecha=$req.data.fecha;
+            $scope.usuario=$req.data.usuario;
+            $scope.detalles=$req.data.detalles;
         })
     };
 }]);
@@ -88,3 +95,29 @@ ordenApp.controller('ordendetController',['$scope','$http','$filter','$window',f
         }
     };
 }]);
+
+jQuery(document).ready(function(){
+
+    jQuery(document).on("click", ".deleteOrden", function(){
+        let id = $(this).data("id"),
+            row = $(this);
+        if(confirm("¿Seguro de eliminar el registro?"))
+        {
+            jQuery.ajax({
+                type : "POST",
+                dataType : "json",
+                url : baseURL + "documento/orden/delete",
+                data : { id : id}
+            }).done(function(data){
+                //console.log(data);
+                if(data.status = true) {
+                    row.parents('tr').remove();
+                    //alert("Eliminación satisfactoria");
+                }
+                else if(data.status = false) { alert("Eliminación fallida"); }
+                else { alert("Access denied..!"); }
+            });
+        }
+    });
+
+});

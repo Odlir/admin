@@ -35,9 +35,11 @@ class Orden_model extends CI_Model
         return $query->num_rows();
     }
     public function get($id) {
-        $this->db->select('orden_id,proveedor_id,DATE_FORMAT(now(),\'%d/%m/%Y\') as fecha,nrodocumento,comentario');
-        $this->db->from('tbl_orden');
-        $this->db->where('orden_id', $id);
+        $this->db->select('o.orden_id,o.proveedor_id,DATE_FORMAT(o.fecha,\'%d/%m/%Y\') as fecha,o.nrodocumento,o.comentario,p.razonsocial proveedor,u.name usuario');
+        $this->db->from('tbl_orden o');
+        $this->db->join('tbl_proveedor p','p.proveedor_id=o.proveedor_id','left');
+        $this->db->join('tbl_users u','u.userId=o.created_by','left');
+        $this->db->where('o.orden_id', $id);
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
             return $query->row();
@@ -63,6 +65,12 @@ class Orden_model extends CI_Model
         return $insert_id;
     }
     function orden_update($id,$info)
+    {
+        $where = array("orden_id"=>$id);
+        $this->db->where($where);
+        return $this->db->update('tbl_orden',$info);
+    }
+    function delete($id,$info)
     {
         $where = array("orden_id"=>$id);
         $this->db->where($where);

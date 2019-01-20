@@ -65,5 +65,11 @@ class Proveedor_model extends CI_Model
         $this->db->where($where);
         return $this->db->update('tbl_proveedor',$info);
     }
+    function delete($id,$info)
+    {
+        $where = array("proveedor_id"=>$id);
+        $this->db->where($where);
+        return $this->db->update('tbl_proveedor',$info);
+    }
 }
 ?>
