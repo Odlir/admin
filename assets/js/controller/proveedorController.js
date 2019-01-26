@@ -5,12 +5,15 @@ myApp.controller('proveedorController',['$scope','$http','$filter','$window',fun
     $scope.ruc;
     $scope.razonsocial;
     $scope.email;
+    $scope.telefono;
     $scope.direccion;
 
     $scope.getDetalles= (id)=>{
         $http.get($scope.url+"documento/proveedor/detalles/"+id).then(($req)=>{
+            //console.log($req.data);
             $scope.ruc=$req.data.ruc;
             $scope.razonsocial=$req.data.razonsocial;
+            $scope.telefono=$req.data.telefono;
             $scope.email=$req.data.email;
             $scope.direccion=$req.data.direccion;
         })

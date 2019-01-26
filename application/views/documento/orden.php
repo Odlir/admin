@@ -10,7 +10,7 @@
         <div class="row">
             <div class="col-xs-12 text-right">
                 <div class="form-group">
-                    <a class="btn btn-primary" href="<?php echo base_url(); ?>documento/orden/show"><i class="fa fa-plus"></i> Crear Nueva Orden</a>
+                    <a class="btn btn-primary" href="<?php echo base_url(); ?>documento/orden/show"><i class="fa fa-plus"></i> Nueva</a>
                 </div>
             </div>
         </div>
@@ -39,6 +39,7 @@
                                 <th>Proveedor</th>
                                 <th>Fecha</th>
                                 <th>Usuario</th>
+                                <th>Estado</th>
                                 <th class="text-center">Actions</th>
                             </tr>
                             <?php
@@ -48,15 +49,22 @@
                                 {
                                     ?>
                                     <tr>
-                                        <td><?php echo sprintf('%09d',  $item->orden_id) ?></td>
-                                        <td><?php echo $item->nrodocumento ?></td>
+                                        <td><?php echo sprintf('%09d',  $item->pedido_id) ?></td>
+                                        <td><?php echo $item->obra ?></td>
                                         <td><?php echo $item->razonsocial ?></td>
                                         <td><?php echo $item->fecha ?></td>
                                         <td><?php echo $item->usuario ?></td>
+                                        <td><?php
+                                            if($item->estado==1) { ?>
+                                                <span class="label label-default">Pendiente</span>
+                                            <?php } else { ?>
+                                                <span class="label label-success">Aprobado</span>
+                                            <?php } ?></td>
                                         <td class="text-center">
-                                            <a class="btn btn-sm btn-primary" ng-click="getDetalles(<?php echo $item->orden_id.",'$item->nrodocumento'";?>)" href="#!" title="Detalles" data-toggle="modal" data-target="#productoModal"><i class="fa fa-info-circle"></i></a> |
-                                            <a class="btn btn-sm btn-info" href="<?php echo base_url().'documento/orden/show/'.$item->orden_id; ?>" title="Edit"><i class="fa fa-pencil"></i></a>
-                                            <a class="btn btn-sm btn-danger deleteOrden" href="#" data-id="<?php echo $item->orden_id; ?>"><i class="fa fa-trash"></i></a>
+                                            <a class="btn btn-sm btn-primary" ng-click="getDetalles(<?php echo $item->pedido_id;?>)" href="#!" title="Detalles" data-toggle="modal" data-target="#productoModal"><i class="fa fa-info-circle"></i></a> |
+                                            <a class="btn btn-sm btn-success" ng-click="getDetalles(<?php echo $item->pedido_id;?>)" href="#!" title="Aprobación" data-toggle="modal" data-target="#productoModalAprobacion"><i class="fa fa-check"></i></a>
+                                            <a class="btn btn-sm btn-info" href="<?php echo base_url().'documento/orden/show/'.$item->pedido_id; ?>" title="Edit"><i class="fa fa-pencil"></i></a>
+                                            <a class="btn btn-sm btn-danger deleteOrden" href="#" data-id="<?php echo $item->pedido_id; ?>"><i class="fa fa-trash"></i></a>
                                         </td>
                                     </tr>
                                     <?php
@@ -89,7 +97,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Obra</label>
                             <div class="col-sm-10">
-                                <input type="text" readonly class="form-control-plaintext" value="{{orden}}">
+                                <input type="text" readonly class="form-control-plaintext" value="{{obra}}">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -139,6 +147,73 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="productoModalAprobacion" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Aprobación de pedido de obra</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <form>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Obra</label>
+                            <div class="col-sm-10">
+                                <input type="text" readonly class="form-control-plaintext" value="{{obra}}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Proveedor</label>
+                            <div class="col-sm-10">
+                                <input type="text" readonly class="form-control-plaintext" value="{{proveedor}}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Fecha</label>
+                            <div class="col-sm-10">
+                                <input type="text" readonly class="form-control-plaintext" value="{{fecha}}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Usuario Creación</label>
+                            <div class="col-sm-10">
+                                <input type="text" readonly class="form-control-plaintext" value="{{usuario}}">
+                            </div>
+                        </div>
+                    </form>
+
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>Nro.</th>
+                            <th>Código</th>
+                            <th>Producto</th>
+                            <th>Cantidad</th>
+                            <th>Comentario</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="det in detalles">
+                            <td>{{$index+1}}</td>
+                            <td>{{det.codigo}}</td>
+                            <td>{{det.nombre}}</td>
+                            <td>{{det.cantidad}}</td>
+                            <td>{{det.comentario}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success aprobarOrden" data-id="{{orden_id}}"  data-dismiss="modal">Aprobar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 <script src="<?php echo base_url(); ?>assets/js/angular.min.js" type="text/javascript"></script>
 <script src="<?php echo base_url(); ?>assets/js/controller/ordenController.js" type="text/javascript"></script>

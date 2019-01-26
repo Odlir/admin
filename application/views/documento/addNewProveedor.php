@@ -44,6 +44,14 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
+                                        <label for="telefono">Telefono: </label>
+                                        <input type="text" class="form-control required" id="telefono" name="telefono" maxlength="50" value="<?php echo $telefono; ?>">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
                                         <label for="direccion">Dirección: </label>
                                         <input type="text" class="form-control required" id="direccion" name="direccion" maxlength="50" value="<?php echo $direccion; ?>">
                                     </div>

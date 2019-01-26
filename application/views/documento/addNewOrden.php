@@ -18,13 +18,26 @@
                     <?php $this->load->helper("form"); ?>
                     <form role="form"  action="<?php echo base_url().$url_action ?>" method="post" role="form">
                         <input type="hidden" id="url" value="<?php echo base_url() ?>">
-                        <input type="hidden" id="orden_id" name="orden_id" value="<?php echo $orden_id;?>" />
+                        <input type="hidden" id="pedido_id" name="pedido_id" value="<?php echo $pedido_id;?>" />
                         <div class="box-body">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="nrodocumento">Obra (centro de costo):*</label>
-                                        <input type="text" class="form-control required" value="<?php echo $nrodocumento;?>" name="nrodocumento" maxlength="128">
+                                        <select class="form-control required" id="orden" name="orden" >
+                                            <option value="0">Obra: *</option>
+                                            <?php
+                                            if(!empty($obras))
+                                            {
+                                                foreach ($obras as $f)
+                                                {
+                                                    ?>
+                                                    <option value="<?php echo $f->orden_id ?>"><?php echo $f->nrodocumento?></option>
+                                                    <?php
+                                                }
+                                            }
+                                            ?>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -181,5 +194,6 @@
 <script >
     $(function () {
         $('#proveedor').val("<?php echo $proveedor_id;?>");
+        $('#orden').val("<?php echo $orden_id;?>");
     });
 </script>

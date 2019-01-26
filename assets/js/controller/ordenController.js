@@ -2,15 +2,17 @@
 let ordenApp = angular.module('ordenApp',[]);
 ordenApp.controller('ordenController',['$scope','$http','$filter','$window',function ($scope,$http,$filter,$window) {
     $scope.detalles=[];
-    $scope.orden;
+    $scope.orden_id;
+    $scope.obra;
     $scope.proveedor;
     $scope.fecha;
     $scope.usuario;
     $scope.url=$('#url').val();
-    $scope.getDetalles= (orden_id,nrodocumento)=>{
-        $scope.orden=nrodocumento;
-        $http.get($scope.url+"documento/orden/detalles/"+orden_id).then(($req)=>{
+    $scope.getDetalles= (pedido_id)=>{
+        $http.get($scope.url+"documento/orden/detalles/"+pedido_id).then(($req)=>{
             //console.log($req.data);
+            $scope.obra=$req.data.obra;
+            $scope.orden_id=pedido_id;
             $scope.proveedor=$req.data.proveedor;
             $scope.fecha=$req.data.fecha;
             $scope.usuario=$req.data.usuario;
@@ -22,7 +24,7 @@ ordenApp.controller('ordendetController',['$scope','$http','$filter','$window',f
     $scope.productos=[];
     $scope.productos_seleccionados=[];
     $scope.url=$('#url').val();
-    $scope.orden_id=$('#orden_id').val();
+    $scope.orden_id=$('#pedido_id').val();
 
     $scope.productos= ()=>{
         $http.get($scope.url+"inventario/producto/all").then(($req)=>{
@@ -41,7 +43,7 @@ ordenApp.controller('ordendetController',['$scope','$http','$filter','$window',f
                 producto_id: $id
             })[0];
             let producto_nuevo = {
-                ordendetalle_id: 0,
+                pedidodetalle_id: 0,
                 producto_id: producto_seleccionado.producto_id,
                 codigo: producto_seleccionado.codigo,
                 nombre: producto_seleccionado.nombre,
@@ -56,7 +58,7 @@ ordenApp.controller('ordendetController',['$scope','$http','$filter','$window',f
     $scope.removeProducto=(producto)=>{
         $scope.productos_seleccionados.forEach(function(item, index, object) {
             if(item.producto_id==producto.producto_id){
-                if(item.ordendetalle_id==0){
+                if(item.pedidodetalle_id==0){
                     //console.log('eliminar fisico');
                     object.splice(index,1);
                 }else if(item.activo==1){
@@ -79,9 +81,10 @@ ordenApp.controller('ordendetController',['$scope','$http','$filter','$window',f
     $window.onload = function() {
         if($scope.orden_id != 0){
             $http.get($scope.url+"documento/orden/detalles/"+$scope.orden_id).then(($req)=>{
-                $.each($req.data, function(index, item) {
+                //console.log($req.data.detalles);
+                $.each($req.data.detalles, function(index, item) {
                     let producto_nuevo={
-                        ordendetalle_id: parseInt(item['ordendetalle_id']),
+                        pedidodetalle_id: parseInt(item['pedidodetalle_id']),
                         producto_id: item['producto_id'],
                         codigo: item['codigo'],
                         nombre: item['nombre'],
@@ -119,5 +122,29 @@ jQuery(document).ready(function(){
             });
         }
     });
+    jQuery(document).on("click", ".aprobarOrden", function(){
+        let id = $(this).data("id"),
+            row = $(this);
+        if(confirm("¿Seguro de aprobar el registro?"))
+        {
+            jQuery.ajax({
+                type : "POST",
+                dataType : "json",
+                url : baseURL + "documento/orden/aprobar",
+                data : { id : id}
+            }).done(function(data){
+                console.log(data);
+                if(data.status = true) {
+                    window.location.href =baseURL+"ordenListing";
+                    //row.parents('tr').remove();
+                    //alert("Eliminación satisfactoria");
+                }
+                else if(data.status = false) { alert("Eliminación fallida"); }
+                else { alert("Access denied..!"); }
+            });
+
+        }
+    });
+
 
 });

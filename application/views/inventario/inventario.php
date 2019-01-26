@@ -21,6 +21,7 @@
                     </div>
                 </div>
             </a>
+            <!--
             <div class="col-md-3 col-sm-6 col-xs-12">
                 <div class="info-box">
                     <span class="info-box-icon bg-red"><i class="fa fa-google-plus"></i></span>
@@ -54,6 +55,8 @@
                     </div>
                 </a>
             </div>
+            -->
+
         </div>
     </section>
 </div>

@@ -39,8 +39,8 @@ class Orden extends BaseController
 
     function show($id = 0)
     {
-        $data['orden_id'] = $id;
-        $data['nrodocumento'] = '';
+        $data['pedido_id'] = $id;
+        $data['orden_id'] = 0;
         $data['fecha'] = '';
         $data['comentario'] = '';
         $data['proveedor_id'] = 0;
@@ -52,13 +52,14 @@ class Orden extends BaseController
 
             $orden = $this->orden_model->get($id);
 
-            $data['nrodocumento'] = $orden->nrodocumento;
+            $data['orden_id'] = $orden->orden_id;
             $data['fecha'] = $orden->fecha;
             $data['comentario'] = $orden->comentario;
             $data['proveedor_id'] = $orden->proveedor_id;
         }
 
         $data['proveedor'] = $this->orden_model->getProveedores();
+        $data['obras'] = $this->orden_model->getObras();
 
         $this->global['pageTitle'] = $title;
         $this->loadViews("documento/addNewOrden", $this->global, $data, NULL);
@@ -68,6 +69,7 @@ class Orden extends BaseController
     {
         $orden = $this->orden_model->get($id);
         $data =array(
+            'obra'=>$orden->obra,
             'proveedor'=>$orden->proveedor,
             'fecha'=>$orden->fecha,
             'usuario'=>$orden->usuario,
@@ -79,23 +81,23 @@ class Orden extends BaseController
 
     function add()
     {
-        $nrodocumento = $this->input->post('nrodocumento');
+        $orden = $this->input->post('orden');
         $proveedor = $this->input->post('proveedor');
         $comentario = $this->input->post('comentario');
         $productos = json_decode($this->input->post('productos'));
 
         $info = array(
-            'nrodocumento' => $nrodocumento,
+            'orden_id' => $orden,
             'proveedor_id' => $proveedor,
             'activo' => 1,
             'created_by'=>1,
             'comentario' => $comentario);
 
-        $orden_id = $this->orden_model->orden_insert($info);
-        if ($orden_id > 0) {
+        $pedido_id = $this->orden_model->orden_insert($info);
+        if ($pedido_id > 0) {
             foreach ($productos as $producto) {
                 $info = array(
-                    'orden_id' => $orden_id,
+                    'pedido_id' => $pedido_id,
                     'producto_id' => $producto->producto_id,
                     'cantidad' => $producto->cantidad,
                     'comentario' => $producto->comentario);
@@ -110,32 +112,32 @@ class Orden extends BaseController
 
     function edit()
     {
-        $orden_id = $this->input->post('orden_id');
-        $nrodocumento = $this->input->post('nrodocumento');
+        $pedido_id = $this->input->post('pedido_id');
+        $orden = $this->input->post('orden');
         $proveedor = $this->input->post('proveedor');
         $comentario = $this->input->post('comentario');
         $productos = json_decode($this->input->post('productos'));
 
         $info = array(
-            'nrodocumento' => $nrodocumento,
+            'orden_id' => $orden,
             'proveedor_id' => $proveedor,
             'comentario' => $comentario);
 
-        $result = $this->orden_model->orden_update($orden_id, $info);
+        $result = $this->orden_model->orden_update($pedido_id, $info);
 
         if ($result) {
             foreach ($productos as $producto) {
-                if($producto->ordendetalle_id != 0){
+                if($producto->pedidodetalle_id != 0){
                     $info = array(
                         'producto_id' => $producto->producto_id,
                         'cantidad' => $producto->cantidad,
                         'comentario' => $producto->comentario,
                         'activo'=>$producto->activo
                     );
-                    $this->orden_model->ordendetalle_update($producto->ordendetalle_id,$info);
+                    $this->orden_model->ordendetalle_update($producto->pedidodetalle_id,$info);
                 }else{
                     $info = array(
-                        'orden_id' => $orden_id,
+                        'pedido_id' => $pedido_id,
                         'producto_id' => $producto->producto_id,
                         'cantidad' => $producto->cantidad,
                         'comentario' => $producto->comentario
@@ -164,6 +166,22 @@ class Orden extends BaseController
         $result = $this->orden_model->delete($id, $info);
 
         if ($result > 0) { echo(json_encode(array('status'=>TRUE))); }
+        else { echo(json_encode(array('status'=>FALSE))); }
+        //}
+    }
+    function aprobar(){
+        /*if($this->isAdmin() == TRUE)
+        {
+            echo(json_encode(array('status'=>'access')));
+        }
+        else
+        {*/
+        $id = $this->input->post('id');
+        $info = array('estado'=>2);
+
+        $result = $this->orden_model->aprobar($id, $info);
+
+        if ($result > 0) { echo(json_encode(array('status'=>TRUE,'id'=>$id,'info'=>$info))); }
         else { echo(json_encode(array('status'=>FALSE))); }
         //}
     }

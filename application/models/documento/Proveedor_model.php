@@ -5,7 +5,7 @@ class Proveedor_model extends CI_Model
 
     function proveedorListing($searchText = '', $page, $segment)
     {
-        $this->db->select('proveedor_id,razonsocial, ruc, email, direccion, activo');
+        $this->db->select('proveedor_id,razonsocial, ruc, email, telefono, direccion, activo');
         $this->db->from('tbl_proveedor');
         if(!empty($searchText)) {
             $likeCriteria = "(razonsocial  LIKE '%".$searchText."%'
@@ -39,7 +39,7 @@ class Proveedor_model extends CI_Model
     }
 
     function get($id){
-        $this->db->select('razonsocial, ruc, email, direccion, activo');
+        $this->db->select('razonsocial, ruc, email, telefono, direccion, activo');
         $this->db->from('tbl_proveedor');
         $this->db->where('proveedor_id', $id);
         $query = $this->db->get();

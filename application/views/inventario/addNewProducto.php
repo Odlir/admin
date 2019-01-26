@@ -16,7 +16,8 @@
                         <h3 class="box-title">Ingresar Detalles del Producto</h3>
                     </div>
                     <?php $this->load->helper("form"); ?>
-                    <form role="form" id="addUser" action="<?php echo base_url().$url_action?>" method="post" role="form">
+                    <?php echo form_open_multipart(base_url().$url_action);?>
+                    <!--<form role="form" action="<?php echo base_url().$url_action?>" method="post">-->
                         <input type="hidden" id="url" value="<?php echo base_url() ?>">
                         <input type="hidden" id="producto_id" name="producto_id" value="<?php echo $producto_id;?>" />
                         <div class="box-body">
@@ -85,36 +86,32 @@
 
                             </div>
                             <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
+                                <div class="col-md-6" >
+                                    <div class="short-div form-group">
                                         <label for="image">Imagen: </label>
-                                        <input type="file" class="form-control" id="image" name="image" maxlength="128">
+                                        <input type="file" class="form-control" id="image" name="image" accept="image/*" >
 
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <img src="" class="img-thumbnail" height="200" width="200">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
+                                    <div class="short-div form-group">
                                         <label for="documento">Documento tecnico: </label>
-                                        <input type="file" class="form-control" id="documento" name="documento" maxlength="128">
+                                        <input type="file" class="form-control" id="documento" name="documento" accept=".pdf, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
                                     </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
+                                    <div class="short-div form-group">
                                         <label for="mobile">Comentario: </label>
                                         <input type="text" class="form-control" id="comentario" value="<?php echo $comentario?>" name="comentario" maxlength="200">
                                     </div>
                                 </div>
-                            </div>
 
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <?php if ($imagen){ ?>
+                                        <img src="<?php echo base_url()."uploads/producto/".$imagen; ?>" class="img-thumbnail" height="200" width="200">
+                                        <?php } else{ ?>
+                                            <img src="<?php echo base_url()."assets/dist/img/default-200.png"; ?>" class="img-thumbnail" height="200" width="200">
+                                        <?php } ?>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="box-footer text-right">

@@ -42,6 +42,7 @@ class Proveedor extends BaseController
         $data['ruc']='';
         $data['razonsocial']='';
         $data['email']='';
+        $data['telefono']='';
         $data['direccion']='';
 
         $data['url_action']='addProveedor';
@@ -55,6 +56,7 @@ class Proveedor extends BaseController
             $data['ruc']=$item->ruc;
             $data['razonsocial']=$item->razonsocial;
             $data['email']=$item->email;
+            $data['telefono']=$item->telefono;
             $data['direccion']=$item->direccion;
         }
 
@@ -68,6 +70,7 @@ class Proveedor extends BaseController
             'ruc'=>$item->ruc,
             'razonsocial'=>$item->razonsocial,
             'email'=>$item->email,
+            'telefono'=>$item->telefono,
             'direccion'=>$item->direccion
         );
         json_output(200, $data);
@@ -78,12 +81,14 @@ class Proveedor extends BaseController
         $ruc = $this->input->post('ruc');
         $razonsocial = $this->input->post('razonsocial');
         $email = $this->input->post('email');
+        $telefono = $this->input->post('telefono');
         $direccion = $this->input->post('direccion');
 
         $info = array(
             'ruc'=>$ruc,
             'razonsocial'=>$razonsocial,
             'email'=>$email,
+            'telefono'=>$telefono,
             'direccion'=> $direccion,
             );
         $result = $this->proveedor_model->insert($info);
@@ -104,12 +109,14 @@ class Proveedor extends BaseController
         $ruc = $this->input->post('ruc');
         $razonsocial = $this->input->post('razonsocial');
         $email = $this->input->post('email');
+        $telefono = $this->input->post('telefono');
         $direccion = $this->input->post('direccion');
 
         $info = array(
             'ruc'=>$ruc,
             'razonsocial'=>$razonsocial,
             'email'=>$email,
+            'telefono'=>$telefono,
             'direccion'=> $direccion,
         );
         $result = $this->proveedor_model->update($proveedor_id, $info);
