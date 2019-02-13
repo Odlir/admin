@@ -79,13 +79,43 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-4">
+                    <?php
+                    $this->load->helper('form');
+                    $error = $this->session->flashdata('error');
+                    if($error)
+                    {
+                        ?>
+                        <div class="alert alert-danger alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <?php echo $this->session->flashdata('error'); ?>
+                        </div>
+                    <?php } ?>
+                    <?php
+                    $success = $this->session->flashdata('success');
+                    if($success)
+                    {
+                        ?>
+                        <div class="alert alert-success alert-dismissable" >
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <?php echo $this->session->flashdata('success'); ?>
+                        </div>
+                    <?php } ?>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <?php echo validation_errors('<div class="alert alert-danger alert-dismissable">', ' <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button></div>'); ?>
+                        </div>
+                    </div>
+            </div>
         </div>
     </section>
 
     <div class="modal fade" id="productoModal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header">
+
+                <div class="modal-header modal-header-2">
                     <h5 class="modal-title" id="exampleModalLabel">Detalle de pedido de obra</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -93,34 +123,34 @@
                 </div>
                 <div class="modal-body">
 
-                    <form>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Obra</label>
-                            <div class="col-sm-10">
-                                <input type="text" readonly class="form-control-plaintext" value="{{obra}}">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Obra</label>
+                            <div class="col-sm-8">
+                                <input type="text" readonly class="form-control" value="{{obra}}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Proveedor</label>
+                            <div class="col-sm-8">
+                                <input type="text" readonly class="form-control" value="{{proveedor}}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Fecha</label>
+                            <div class="col-sm-8">
+                                <input type="text" readonly class="form-control" value="{{fecha}}">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Proveedor</label>
-                            <div class="col-sm-10">
-                                <input type="text" readonly class="form-control-plaintext" value="{{proveedor}}">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Fecha</label>
-                            <div class="col-sm-10">
-                                <input type="text" readonly class="form-control-plaintext" value="{{fecha}}">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Usuario Creación</label>
-                            <div class="col-sm-10">
-                                <input type="text" readonly class="form-control-plaintext" value="{{usuario}}">
+                            <label class="col-sm-4 control-label">Usuario Creación</label>
+                            <div class="col-sm-8">
+                                <input type="text" readonly class="form-control" value="{{usuario}}">
                             </div>
                         </div>
                     </form>
 
-                    <table class="table table-hover">
+                    <table class="table table-bordered" >
                         <thead>
                         <tr>
                             <th>Nro.</th>
@@ -150,7 +180,7 @@
     <div class="modal fade" id="productoModalAprobacion" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header modal-header-2">
                     <h5 class="modal-title" id="exampleModalLabel">Aprobación de pedido de obra</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -158,34 +188,34 @@
                 </div>
                 <div class="modal-body">
 
-                    <form>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Obra</label>
-                            <div class="col-sm-10">
-                                <input type="text" readonly class="form-control-plaintext" value="{{obra}}">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Obra</label>
+                            <div class="col-sm-8">
+                                <input type="text" readonly class="form-control" value="{{obra}}">
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Proveedor</label>
-                            <div class="col-sm-10">
-                                <input type="text" readonly class="form-control-plaintext" value="{{proveedor}}">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Proveedor</label>
+                            <div class="col-sm-8">
+                                <input type="text" readonly class="form-control" value="{{proveedor}}">
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Fecha</label>
-                            <div class="col-sm-10">
-                                <input type="text" readonly class="form-control-plaintext" value="{{fecha}}">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Fecha</label>
+                            <div class="col-sm-8">
+                                <input type="text" readonly class="form-control" value="{{fecha}}">
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Usuario Creación</label>
-                            <div class="col-sm-10">
-                                <input type="text" readonly class="form-control-plaintext" value="{{usuario}}">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Usuario Creación</label>
+                            <div class="col-sm-8">
+                                <input type="text" readonly class="form-control" value="{{usuario}}">
                             </div>
                         </div>
                     </form>
 
-                    <table class="table table-hover">
+                    <table class="table table-bordered">
                         <thead>
                         <tr>
                             <th>Nro.</th>

@@ -1,0 +1,18 @@
+.modal-header-2{
+    padding:9px 15px;
+    border-bottom:1px solid #eee;
+    background-color: #3c8dbc;
+    color: #ffffff;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+.modal-header-2 button{
+    margin-top: -20px !important;
+}
+.modal-header-2 .close{
+    color: #fff !important;
+}

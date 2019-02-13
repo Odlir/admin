@@ -75,7 +75,7 @@
     <div class="modal fade" id="detalleModal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header modal-header-2">
                     <h5 class="modal-title" id="exampleModalLabel">Detalle del Proveedor</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -83,35 +83,35 @@
                 </div>
                 <div class="modal-body">
 
-                    <form>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">RUC</label>
-                            <div class="col-sm-10">
-                                <input type="text" readonly class="form-control-plaintext" value="{{ruc}}">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">RUC</label>
+                            <div class="col-sm-8">
+                                <input type="text" readonly class="form-control" value="{{ruc}}">
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Razón social</label>
-                            <div class="col-sm-10">
-                                <input type="text" readonly class="form-control-plaintext" value="{{razonsocial}}">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Razón social</label>
+                            <div class="col-sm-8">
+                                <input type="text" readonly class="form-control" value="{{razonsocial}}">
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Email</label>
-                            <div class="col-sm-10">
-                                <input type="text" readonly class="form-control-plaintext" value="{{email}}">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Email</label>
+                            <div class="col-sm-8">
+                                <input type="text" readonly class="form-control" value="{{email}}">
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Telefono</label>
-                            <div class="col-sm-10">
-                                <input type="text" readonly class="form-control-plaintext" value="{{telefono}}">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Telefono</label>
+                            <div class="col-sm-8">
+                                <input type="text" readonly class="form-control" value="{{telefono}}">
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Dirección</label>
-                            <div class="col-sm-10">
-                                <input type="text" readonly class="form-control-plaintext" value="{{direccion}}">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Dirección</label>
+                            <div class="col-sm-8">
+                                <input type="text" readonly class="form-control" value="{{direccion}}">
                             </div>
                         </div>
                     </form>

@@ -75,7 +75,7 @@
 <div class="modal fade" id="detalleModal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header modal-header-2">
                 <h5 class="modal-title" id="exampleModalLabel">Detalle del Proveedor</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -83,41 +83,41 @@
             </div>
             <div class="modal-body">
 
-                <form>
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Código</label>
-                        <div class="col-sm-10">
-                            <input type="text" readonly class="form-control-plaintext" value="{{codigo}}">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Código</label>
+                        <div class="col-sm-8">
+                            <input type="text" readonly class="form-control" value="{{codigo}}">
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Nombre</label>
-                        <div class="col-sm-10">
-                            <input type="text" readonly class="form-control-plaintext" value="{{nombre}}">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Nombre</label>
+                        <div class="col-sm-8">
+                            <input type="text" readonly class="form-control" value="{{nombre}}">
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Familia</label>
-                        <div class="col-sm-10">
-                            <input type="text" readonly class="form-control-plaintext" value="{{familia}}">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Familia</label>
+                        <div class="col-sm-8">
+                            <input type="text" readonly class="form-control" value="{{familia}}">
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Marca</label>
-                        <div class="col-sm-10">
-                            <input type="text" readonly class="form-control-plaintext" value="{{marca}}">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Marca</label>
+                        <div class="col-sm-8">
+                            <input type="text" readonly class="form-control" value="{{marca}}">
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Unidad</label>
-                        <div class="col-sm-10">
-                            <input type="text" readonly class="form-control-plaintext" value="{{unidad}}">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Unidad</label>
+                        <div class="col-sm-8">
+                            <input type="text" readonly class="form-control" value="{{unidad}}">
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Comentario</label>
-                        <div class="col-sm-10">
-                            <input type="text" readonly class="form-control-plaintext" value="{{comentario}}">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Comentario</label>
+                        <div class="col-sm-8">
+                            <input type="text" readonly class="form-control" value="{{comentario}}">
                         </div>
                     </div>
                 </form>

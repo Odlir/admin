@@ -133,7 +133,6 @@ jQuery(document).ready(function(){
                 url : baseURL + "documento/orden/aprobar",
                 data : { id : id}
             }).done(function(data){
-                console.log(data);
                 if(data.status = true) {
                     window.location.href =baseURL+"ordenListing";
                     //row.parents('tr').remove();
@@ -141,7 +140,10 @@ jQuery(document).ready(function(){
                 }
                 else if(data.status = false) { alert("Eliminación fallida"); }
                 else { alert("Access denied..!"); }
-            });
+
+            }).error(function(data){
+                console.log('error',data);
+        });
 
         }
     });

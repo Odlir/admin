@@ -8,6 +8,7 @@ class Orden extends BaseController
     public function __construct()
     {
         parent::__construct();
+        $this->load->library('session');
         $this->load->model('documento/orden_model');
         $this->isLoggedIn();
     }
@@ -169,6 +170,7 @@ class Orden extends BaseController
         else { echo(json_encode(array('status'=>FALSE))); }
         //}
     }
+
     function aprobar(){
         /*if($this->isAdmin() == TRUE)
         {
@@ -176,12 +178,44 @@ class Orden extends BaseController
         }
         else
         {*/
+
         $id = $this->input->post('id');
         $info = array('estado'=>2);
 
         $result = $this->orden_model->aprobar($id, $info);
 
-        if ($result > 0) { echo(json_encode(array('status'=>TRUE,'id'=>$id,'info'=>$info))); }
+        if ($result > 0) {
+            $orden = $this->orden_model->get($id);
+
+            $emails=array();
+
+            $correos = $this->orden_model->getCorreos();
+            foreach ($correos as $correo){
+                $emails[]=$correo->email;
+            }
+
+            $this->load->library('email');
+            $config = array();
+            $config['protocol'] = 'smtp';
+            $config['smtp_host'] = 'ssl://smtp.gmail.com';
+            $config['smtp_user'] = 'roy.parejo.921115@gmail.com';
+            $config['smtp_pass'] = 'rp921115';
+            $config['smtp_port'] = 465;
+            $this->email->initialize($config);
+            $this->email->set_newline("\r\n");
+
+            $this->email->from('roy.parejo.921115@gmail.com', 'soporte');
+            $this->email->to($emails);
+            $this->email->subject('Pedido de la obra '.$orden->obra.' aprobado');
+            $this->email->message('El pedido de la obra '.$orden->obra.' fue aprobada el '.$orden->fecha);
+
+            if($this->email->send())
+                $this->session->set_flashdata("success","Los correos fueron enviados satisfactoriamente.");
+            else
+                $this->session->set_flashdata("error","se encontro un error en envio de correos");
+
+            echo(json_encode(array('status'=>TRUE,'id'=>$id,'info'=>$info)));
+        }
         else { echo(json_encode(array('status'=>FALSE))); }
         //}
     }

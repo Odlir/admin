@@ -119,4 +119,11 @@ class Orden_model extends CI_Model
 
         return $query->result();
     }
+    function getCorreos(){
+        $this->db->select('*');
+        $this->db->from('tbl_emails');
+        $this->db->where('activo', 1);
+        $query = $this->db->get();
+        return $query->result();
+    }
 }
